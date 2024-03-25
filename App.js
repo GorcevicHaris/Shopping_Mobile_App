@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { View, Text } from "react-native";
+const logo = require("./assets/adaptive-icon.png");
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, backgroundColor: "plum" }}>
+      <View
+        style={{
+          width: 200,
+          height: 200,
+          backgroundColor: "red",
+        }}
+      ></View>
+      <View
+        style={{
+          width: 200,
+          height: 200,
+          backgroundColor: "green",
+        }}
+      >
+        <Text style={{ color: "red" }}>
+          sta ima <Text style={{ color: "blue" }}>brate</Text>{" "}
+        </Text>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
