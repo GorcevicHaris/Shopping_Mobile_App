@@ -52,14 +52,45 @@ import {
 //   );
 // }
 //===========================================================================================
-
+// //ActivityIndicator Loeader
+// export default function App() {
+//   return (
+//     <View style={{ flex: 1, backgroundColor: "blue", padding: 60 }}>
+//       <ActivityIndicator />
+//       <ActivityIndicator size={"large"} />
+//       <ActivityIndicator size={"small"} />
+//       <ActivityIndicator color={"red"} animating={false} />
+//     </View>
+//   );
+// }
+//===========================================================================================
+//Alert radjen sa onPress u Alert.alert ima 3 parametra svi imaju svoju ulogu
 export default function App() {
   return (
     <View style={{ flex: 1, backgroundColor: "blue", padding: 60 }}>
-      <ActivityIndicator />
-      <ActivityIndicator size={"large"} />
-      <ActivityIndicator size={"small"} />
-      <ActivityIndicator color={"red"} />
+      <Button
+        title="Alert1"
+        onPress={() => Alert.alert("Invalid Data", "u will be warned again")}
+      />
+      <Button
+        title="Alert2"
+        onPress={() => Alert.alert("Invalid Data", "DOB incorrect")}
+      />
+      <Button
+        title="Alert3"
+        onPress={() =>
+          Alert.alert("DOB incorrect", "DOB incorrect", [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel pressed"),
+            },
+            {
+              text: "OK",
+              onPress: () => console.log("OK pressed"),
+            },
+          ])
+        }
+      />
     </View>
   );
 }
