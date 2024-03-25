@@ -1,24 +1,33 @@
-import { View, Text, Image, ImageBackground } from "react-native";
+import { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+  Modal,
+  Button,
+} from "react-native";
 const logo = require("./assets/adaptive-icon.png");
 export default function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: "plum", padding: 60 }}>
-      <Image style={{ width: 300, height: 300 }} source={logo}></Image>
-      <Text>
-        There are many variations of passages of Lorem Ipsum available, but the
-        majority have suffered alteration in some form, by injected humour, or
-        randomised words which don't look even slightly believable. If you are
-        going to use a passage of Lorem Ipsum, you need to be sure there isn't
-        anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-        generators on the Internet tend to repeat predefined chunks as
-        necessary, making this the first true generator on the Internet. It uses
-        a dictionary of over 200 Latin words, combined with a handful of model
-        sentence structures, to generate Lorem Ipsum which looks reasonable. The
-        generated Lorem Ipsum is therefore always free from repetition, injected
-        humour, or non-characteristic words etc. 5 paragraphs words bytes lists
-        Start with 'Lorem ipsum dolor sit amet...'
-      </Text>
-      <Image style={{ width: 300, height: 300 }} source={logo}></Image>
+      <Button
+        title="Press"
+        color={"midnightblue"}
+        onPress={() => setIsModalVisible(true)}
+      />
+      <Modal visible={isModalVisible}>
+        <View style={{ flex: 1, backgroundColor: "lightblue", padding: 60 }}>
+          <Text>Modal Button</Text>
+          <Button
+            title="Close"
+            color={"midnightblue"}
+            onPress={() => setIsModalVisible(false)}
+          />
+        </View>
+      </Modal>
     </View>
   );
 }
