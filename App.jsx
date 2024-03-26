@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   View,
   Text,
@@ -15,15 +14,45 @@ import {
 import Greet from "./components/Greet";
 import logo from "./assets/adaptive-icon.png";
 export default function App() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   return (
-    <View style={style.container}>
-      <Text>asda</Text>
+    <View style={{flex:1,backgroundColor:'black',padding:20}}>
+      <ScrollView >
+        <Image  source={logo} style={{height:200,width:200}}/>
+        <View style={style.container2}></View>
+        <View style={style.container3}></View>
+        <View style={style.container2}></View>
+        <View style={style.container3}></View>
+        <View style={style.container2}></View>
+        <View style={style.container3}></View>
+        <View style={style.container2}></View>
+        <View style={style.container3}></View>
+        <View style={{ flex: 1 }} />
+      </ScrollView>
     </View>
+
   );
 }
+
 const style = StyleSheet.create({
-  container:{
-    backgroundColor: "red", padding: 60, height: "100%" 
-  }
-})
+  container: {
+    flex: 1,
+    backgroundColor: "red",
+    padding: 60,
+  },
+  container2: {
+    backgroundColor: "green",
+    padding: 60,
+    marginBottom: 20,
+    marginTop:20,
+    borderWidth:2,
+    borderColor:'red',
+    borderStyle:"solid",
+    borderRadius:10,
+
+  },
+  container3: {
+    backgroundColor: "blue",
+    padding: 60,
+    marginBottom: 20, // Dodajte razmak između komponenti ako je potrebno
+  },
+});
