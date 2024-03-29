@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from "react-native";
 import Greet from "./components/Greet";
 import logo from "./assets/adaptive-icon.png";
@@ -39,21 +40,27 @@ export default function App() {
   );
 }
 
+
+const windowWidth =  Dimensions.get('window').width
+const windowHeight =  Dimensions.get('window').height
+
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
     flexDirection: 'row',
     flexWrap:'wrap',
     justifyContent: 'flex-start',
-    backgroundColor: 'orange',
+    backgroundColor: 'green',
     alignItems:'flex-center',
     justifyContent:'center',
-    paddingTop:50
+    paddingTop:50,
+    gap:100,
   },
   container2: {
     height: 100,
-    width: 100,
-    backgroundColor: 'yellow',
+    width: windowWidth > 500 ? "70%" : "90%",
+    backgroundColor: 'red',
     margin: 10,
   },
   container3: {
