@@ -9,50 +9,57 @@ import {
   StatusBar,
   ActivityIndicator,
   Alert,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from "react-native";
 import Greet from "./components/Greet";
 import logo from "./assets/adaptive-icon.png";
-export default function App() {
-  return (
-    <View style={{flex:1,backgroundColor:'black',padding:20}}>
-      <ScrollView >
-        <Image  source={logo} style={{height:200,width:200}}/>
-        <View style={style.container2}></View>
-        <View style={style.container3}></View>
-        <View style={style.container2}></View>
-        <View style={style.container3}></View>
-        <View style={style.container2}></View>
-        <View style={style.container3}></View>
-        <View style={style.container2}></View>
-        <View style={style.container3}></View>
-        <View style={{ flex: 1 }} />
-      </ScrollView>
-    </View>
+import React, { useState } from "react";
 
+export default function App() {
+  const [color,setColor] = useState(styles.container2)
+  function handleColor(){
+    if(color == styles.container2){
+      setColor(styles.container3)
+    }else{
+      setColor(styles.container2)
+    }
+  }
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity style={color} onPress={handleColor}></TouchableOpacity>
+      <View style={color}></View>
+      <View style={styles.container2}></View>
+      <View style={color}></View>
+      <View style={styles.container2}></View>
+      <View style={color}></View>
+      <View style={styles.container2}></View>
+      <View style={color}></View>
+    </ScrollView>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "red",
-    padding: 60,
+    flex:1,
+    flexDirection: 'row',
+    flexWrap:'wrap',
+    justifyContent: 'flex-start',
+    backgroundColor: 'orange',
+    alignItems:'flex-center',
+    justifyContent:'center',
+    paddingTop:50
   },
   container2: {
-    backgroundColor: "green",
-    padding: 60,
-    marginBottom: 20,
-    marginTop:20,
-    borderWidth:2,
-    borderColor:'red',
-    borderStyle:"solid",
-    borderRadius:10,
-
+    height: 100,
+    width: 100,
+    backgroundColor: 'yellow',
+    margin: 10,
   },
   container3: {
-    backgroundColor: "blue",
-    padding: 60,
-    marginBottom: 20, // Dodajte razmak između komponenti ako je potrebno
+    height: 100,
+    width: 100,
+    backgroundColor: 'blue',
+    margin: 10,
   },
 });
