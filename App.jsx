@@ -28,14 +28,14 @@ export default function App() {
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity style={color} onPress={handleColor}></TouchableOpacity>
-      <View style={color}></View>
+      {/* <TouchableOpacity style={color} onPress={handleColor}></TouchableOpacity> */}
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
       <View style={styles.container2}></View>
       <View style={color}></View>
       <View style={styles.container2}></View>
-      <View style={color}></View>
       <View style={styles.container2}></View>
-      <View style={color}></View>
     </ScrollView>
   );
 }
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap:'wrap',
     justifyContent: 'flex-start',
-    backgroundColor: 'green',
+    backgroundColor: 'orange',
     alignItems:'flex-center',
     justifyContent:'center',
     paddingTop:50,
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
   },
   container2: {
     height: 100,
-    width: windowWidth > 500 ? "70%" : "90%",
     backgroundColor: 'red',
+    width: windowWidth >200 ? "95%" : "80%",
     margin: 10,
   },
   container3: {
     height: 100,
-    width: 100,
+    width: windowWidth > 600 ? "100%" : "80%",
     backgroundColor: 'blue',
     margin: 10,
   },
