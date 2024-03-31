@@ -1,9 +1,17 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 function About({data}) {
   return (
-    <Text>Whats up {data}</Text>
+    <View style={style.container1}>
+    <Text>Whats asup {data}</Text>
+    </View>
   )
 }
 
+const style = StyleSheet.create({
+  container1:{
+    flex:1,
+    backgroundColor:'yellow',
+  }
+})
 export default About
