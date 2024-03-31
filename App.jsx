@@ -18,7 +18,8 @@ import logo from "./assets/adaptive-icon.png";
 import React, { useState } from "react";
 
 export default function App() {
-  const [color,setColor] = useState(styles.container2)
+  // const [color,setColor] = useState(styles.container2)
+
   function handleColor(){
     if(color == styles.container2){
       setColor(styles.container3)
@@ -26,6 +27,7 @@ export default function App() {
       setColor(styles.container2)
     }
   }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* <TouchableOpacity style={color} onPress={handleColor}></TouchableOpacity> */}
@@ -33,7 +35,26 @@ export default function App() {
       <View style={styles.container2}></View>
       <View style={styles.container2}></View>
       <View style={styles.container2}></View>
-      <View style={color}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View><View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View><View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
+      <View style={styles.container2}></View>
       <View style={styles.container2}></View>
       <View style={styles.container2}></View>
     </ScrollView>
@@ -47,25 +68,22 @@ const windowHeight =  Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    height:"auto",
     flexDirection: 'row',
     flexWrap:'wrap',
     justifyContent: 'flex-start',
     backgroundColor: 'orange',
     alignItems:'flex-center',
     justifyContent:'center',
-    paddingTop:50,
-    gap:100,
+    padding:50
   },
   container2: {
-    height: 100,
+    height:50,
+    width:"100%",
     backgroundColor: 'red',
-    width: windowWidth >200 ? "95%" : "80%",
     margin: 10,
   },
   container3: {
-    height: 100,
-    width: windowWidth > 600 ? "100%" : "80%",
     backgroundColor: 'blue',
     margin: 10,
   },
