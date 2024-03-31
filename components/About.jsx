@@ -1,17 +1,32 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-function About({data}) {
+import { Button, StyleSheet, Text, View } from 'react-native'
+import HomePage from './HomePage'
+export default function About({data}) {
+  
+  const goToHome = () => {
+    console.log('Navigating to Home')
+    navigate.navigate('Home')
+  }
+
+  const navigate = useNavigation()
   return (
     <View style={style.container1}>
-    <Text>Whats asup {data}</Text>
+    <Text style={style.box1}>Whats asup {data}</Text>
+    <Button style={style.box1} title='home' onPress={goToHome}/>
     </View>
   )
 }
 
 const style = StyleSheet.create({
   container1:{
-    flex:1,
+    height:"100%",
+    width:"100%",
     backgroundColor:'yellow',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  box1:{
+    color:'red'
   }
 })
-export default About

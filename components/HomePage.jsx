@@ -19,21 +19,24 @@
                 onRequestClose={() => setModalVisible(false)}
             >
                 <View style={styles.modalContainer}>
-                    <Text>This is inside the modal:</Text>
                     <About />
-                    <Button title="Close" onPress={() => setModalVisible(false)} />
+                    <Button  title="Close" onPress={() => setModalVisible(false)} />
                 </View>
             </Modal>
-
       </View>
     )
   }
   export default HomePage
   const styles = StyleSheet.create({
-    container1:{
-      height:100,
-      width:100,
-      color:'red',
-      backgroundColor:'blue'
-    }
-  })
+    container1: {
+        height:'100%',
+        width:'100%',
+        color: 'red',
+        backgroundColor: 'blue',
+    },
+    modalContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    },
+});
