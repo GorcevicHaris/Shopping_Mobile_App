@@ -4,13 +4,15 @@ import {
   ActivityIndicator,
   Button,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-export default function About({ navigation }) {
-  const [isloading, setIsLoading] = useState();
+
+export default function About({ navigation, data }) {
+  const [isLoading, setIsLoading] = useState(false);
 
   function onLoader() {
     setIsLoading(true);
@@ -18,25 +20,41 @@ export default function About({ navigation }) {
       navigation.navigate("Home");
     }, 1000);
   }
+
   return (
-    <View style={style.container1}>
-      {isloading ? (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <Text onPress={onLoader}>Go to Home</Text>
+        <View style={styles.container1}>
+          <Text>title :{data.title}</Text>
+          <Text>description : {data.description}</Text>
+          <Text>price : {data.price}</Text>
+          <Text onPress={onLoader}>Go to Home</Text>
+        </View>
       )}
-    </View>
+    </ScrollView>
   );
 }
-const style = StyleSheet.create({
-  container1: {
-    height: "100%",
-    width: "100%",
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    height: "auto",
     backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
   },
-  box1: {
-    color: "red",
+  container1: {
+    height: "auto",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  container2: {
+    height: "100%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
   },
 });
