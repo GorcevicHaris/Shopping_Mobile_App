@@ -1,26 +1,42 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-export default function About({data}) {
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Button,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+export default function About({ navigation }) {
+  const [isloading, setIsLoading] = useState();
 
-  const navigation = useNavigation()
+  function onLoader() {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigation.navigate("Home");
+    }, 1000);
+  }
   return (
     <View style={style.container1}>
-    <Text style={style.box1}>Whatsasdsad asup {data}</Text>
-    <Button  title='go to Home' onPress={()=> navigation.navigate("Home")}/>
+      {isloading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text onPress={onLoader}>Go to Home</Text>
+      )}
     </View>
-  )
+  );
 }
-
 const style = StyleSheet.create({
-  container1:{
-    height:"100%",
-    width:"100%",
-    backgroundColor:'green',
-    alignItems:'center',
-    justifyContent:'center'
+  container1: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "green",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  box1:{
-    color:'red'
-  }
-})
+  box1: {
+    color: "red",
+  },
+});
