@@ -20,7 +20,7 @@ export default function About({ navigation, data }) {
       navigation.navigate("Home");
     }, 1000);
   }
-
+  console.log(isLoading);
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {isLoading ? (
