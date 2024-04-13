@@ -21,6 +21,7 @@ export default function About({ navigation, data }) {
     }, 1000);
   }
   console.log(isLoading);
+  //
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {isLoading ? (
