@@ -11,7 +11,7 @@ import {
   View,
 } from "react-native";
 
-export default function About({ navigation, data }) {
+export default function About({ data, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
 
   function onLoader() {
@@ -20,17 +20,12 @@ export default function About({ navigation, data }) {
       navigation.navigate("Home");
     }, 1000);
   }
-  console.log(isLoading);
-  console.log(data, "data");
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
         <View style={styles.container1}>
-          <Text>title :{data?.title}</Text>
-          <Text>description : {data?.description}</Text>
-          <Text>price : {data?.price}</Text>
           <Text onPress={onLoader}>Go to Home</Text>
         </View>
       )}

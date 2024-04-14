@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, FlatList, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import About from "./About";
+import Data from "./Data";
 
 function HomePage({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState([]);
 
-  function getData() {
-    axios
-      .get(`https://dummyjson.com/products`)
-      .then((response) => setData(response.data.products));
-  }
   useEffect(() => {
-    getData();
+    axios.get(`https://dummyjson.com/products`).then((response) => {
+      setData(response.data.products);
+    });
   }, []);
-  console.log(data);
+
+  const renderItem = ({ item }) => <Data data={item} />;
+
   return (
     <View style={styles.container1}>
       <Button
         onPress={() => navigation.navigate("About")}
         title="Go to About"
+        color="white"
       />
-      {data && data.map((data, index) => <About key={index} data={data} />)}
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 }
@@ -36,5 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "blue",
+    padding: 20,
   },
 });
