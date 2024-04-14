@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Button,
@@ -20,6 +20,7 @@ export default function About({ data, navigation }) {
       navigation.navigate("Home");
     }, 1000);
   }
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {isLoading ? (
