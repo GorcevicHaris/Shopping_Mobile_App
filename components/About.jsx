@@ -11,8 +11,9 @@ import {
   View,
 } from "react-native";
 
-export default function About({ data, navigation }) {
+export default function About({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
+  const { setIsLoader } = route.params;
 
   function onLoader() {
     setIsLoading(true);

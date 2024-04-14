@@ -12,9 +12,9 @@ import axios from "axios";
 import About from "./About";
 import Data from "./Data";
 
-function HomePage({ navigation }) {
+function HomePage({ navigation, loader }) {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  let [isLoader, setIsLoader] = useState(false);
 
   useEffect(() => {
     axios.get(`https://dummyjson.com/products`).then((response) => {
@@ -23,16 +23,17 @@ function HomePage({ navigation }) {
   }, []);
 
   function handleClick() {
-    setIsLoading(true);
+    setIsLoader(true);
+
     setTimeout(() => {
-      navigation.navigate("About");
+      navigation.navigate("About", { setIsLoader });
     }, 1000);
   }
 
   const renderItem = ({ item }) => <Data data={item} />;
   return (
     <View style={styles.container1}>
-      {isLoading ? (
+      {isLoader ? (
         <ActivityIndicator />
       ) : (
         <View>
