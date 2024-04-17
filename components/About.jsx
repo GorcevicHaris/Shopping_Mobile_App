@@ -29,7 +29,7 @@ export default function About({ route, navigation }) {
         <ActivityIndicator />
       ) : (
         <View style={styles.box}>
-          <Text styl={styles.text} onPress={onLoader}>
+          <Text style={styles.text} onPress={onLoader}>
             Go to Home
           </Text>
         </View>
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   text: {
-    fontSize: windowWidth > 500 ? 50 : 25,
+    fontSize: windowWidth > 600 ? 45 : 20,
+    color: windowWidth > 440 ? "pink" : "purple",
   },
 });
