@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Button,
+  Dimensions,
   Modal,
   ScrollView,
   StyleSheet,
@@ -23,36 +24,34 @@ export default function About({ route, navigation }) {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.scrollContainer}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <View style={styles.container1}>
-          <Text onPress={onLoader}>Go to Home</Text>
+        <View style={styles.box}>
+          <Text styl={styles.text} onPress={onLoader}>
+            Go to Home
+          </Text>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 }
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   scrollContainer: {
-    height: "auto",
+    flex: 1,
     backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
   },
-  container1: {
-    height: "auto",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+  box: {
+    width: windowWidth < 300 ? "10%" : "90%",
+    height: windowHeight < 300 ? "10%" : "90%",
+    backgroundColor: "blue",
   },
-  container2: {
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "red",
+  text: {
+    fontSize: windowWidth > 500 ? 50 : 25,
   },
 });

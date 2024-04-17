@@ -18,14 +18,14 @@ function HomePage({ navigation, loader }) {
 
   useEffect(() => {
     axios.get(`https://dummyjson.com/products`).then((response) => {
-      setData(response.data.products);
+      setData(response.data.products).catch((err) => console.log(err));
     });
   }, []);
 
   function handleClick() {
     setIsLoader(true);
-
     setTimeout(() => {
+      setIsLoader(false);
       navigation.navigate("About", { setIsLoader });
     }, 1000);
   }
