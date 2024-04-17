@@ -94,3 +94,6 @@ export default function App() {
 //     </View>
 //   );
 // }
+//========================================================================
+//ako zelimo da mozemo telefono  okretati to jest imai orjentaciju horizontalno i vertikalno
+// idemo u app.json i stavljamo "orientation": "default",
