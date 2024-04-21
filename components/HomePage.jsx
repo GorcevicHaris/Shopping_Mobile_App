@@ -14,33 +14,30 @@ import Data from "./Data";
 
 function HomePage({ navigation, loader }) {
   const [data, setData] = useState([]);
-  let [isLoader, setIsLoader] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://dummyjson.com/products`).then((response) => {
-      setData(response.data.products).catch((err) => console.log(err));
-    });
+    axios
+      .get(`https://real-time-product-search.p.rapidapi.com/search`, {
+        params: {
+          q: "Nike shoes",
+          country: "us",
+          language: "en",
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            "1b2013684fmsh5e2154cde374d29p1987b9jsnf9a0e60af14e",
+          "X-RapidAPI-Host": "real-time-product-search.p.rapidapi.com",
+        },
+      })
+      .then((response) => {
+        setData(response.data.data).catch((err) => console.log(err));
+      });
   }, []);
 
-  function handleClick() {
-    setIsLoader(true);
-    setTimeout(() => {
-      setIsLoader(false);
-      navigation.navigate("About", { setIsLoader });
-    }, 1000);
-  }
-
-  const renderItem = ({ item }) => <Data data={item} />;
   return (
     <View style={styles.container1}>
-      {isLoader ? (
-        <ActivityIndicator />
-      ) : (
-        <View>
-          <Button onPress={handleClick} title="Go to About" color="white" />
-          <FlatList data={data} renderItem={renderItem} />
-        </View>
-      )}
+      <Text>fdsfsfd</Text>
+      <FlatList data={data} renderItem={({ item }) => <Data data={item} />} />
     </View>
   );
 }

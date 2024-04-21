@@ -14,7 +14,6 @@ import {
 
 export default function About({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsLoader } = route.params;
 
   function onLoader() {
     setIsLoading(true);
