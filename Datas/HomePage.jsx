@@ -9,8 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import About from "./About";
-import Data from "./Data";
+import Data from "../components/Data";
 
 function HomePage({ navigation, loader }) {
   const [data, setData] = useState([]);

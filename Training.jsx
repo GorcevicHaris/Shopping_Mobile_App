@@ -9,7 +9,21 @@ import {
   Button,
 } from "react-native";
 
-import logo from "./assets/adaptive-icon.png";
+// import {
+//   View,
+//   Text,
+//   Image,
+//   ImageBackground,
+//   ScrollView,
+//   Modal,
+//   Button,
+//   StatusBar,
+//   ActivityIndicator,
+//   Alert,
+//   StyleSheet,
+//   TouchableOpacity,
+//   Dimensions,
+// } from "react-native";
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   return (
