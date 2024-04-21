@@ -14,10 +14,12 @@ const Footer = () => (
   </View>
 );
 const size = 37;
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 const styles = StyleSheet.create({
   footer: {
-    height: 100,
-    backgroundColor: "#2D2926FF",
+    height: 90,
+    backgroundColor: siva,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",

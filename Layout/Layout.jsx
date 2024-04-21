@@ -2,12 +2,13 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Header from "./Header";
 import Footer from "./Footer";
+import HomePage from "../Datas/HomePage";
 
 const Layout = ({ children }) => {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.content}>{children}</View>
+      <HomePage />
       <Footer />
     </View>
   );

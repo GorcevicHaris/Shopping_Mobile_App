@@ -5,17 +5,22 @@ const Header = () => (
     <Text style={styles.headerText}>Haringan-Shop</Text>
   </View>
 );
-
+const gray = "#2D2926FF";
+const orange = "#E94B3CFF";
 const styles = StyleSheet.create({
   header: {
-    height: 50,
-    backgroundColor: "lightblue",
+    height: 150,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: gray,
+    paddingTop: 40,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
+    letterSpacing: "2px",
+    fontWeight: "900",
+    color: orange,
   },
 });
 
