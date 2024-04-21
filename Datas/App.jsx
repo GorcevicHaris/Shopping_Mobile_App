@@ -24,7 +24,11 @@ const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Layout} options={{ title: "" }} />
+        <Stack.Screen
+          name="Home"
+          component={Layout}
+          options={{ title: "Welcome" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
