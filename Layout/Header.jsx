@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 25,
     fontWeight: "bold",
-    letterSpacing: "2px",
+    letterSpacing: 5,
     fontWeight: "900",
     color: orange,
   },

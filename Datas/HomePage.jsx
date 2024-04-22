@@ -5,52 +5,24 @@ import {
   TextInput,
   FlatList,
   ActivityIndicator,
+  Text,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import Data from "../components/Data";
-
-function HomePage({ navigation, loader }) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`https://real-time-product-search.p.rapidapi.com/search`, {
-        params: {
-          q: "Nike shoes",
-          country: "us",
-          language: "en",
-        },
-        headers: {
-          "X-RapidAPI-Key":
-            "1b2013684fmsh5e2154cde374d29p1987b9jsnf9a0e60af14e",
-          "X-RapidAPI-Host": "real-time-product-search.p.rapidapi.com",
-        },
-      })
-      .then((response) => {
-        setData(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+import products from "../Products/Produtcs.json";
+console.log("products", products);
+function HomePage() {
   return (
     <View style={styles.container1}>
       <View style={{ flexDirection: "row" }}>
         <TextInput style={styles.input} />
         <Feather style={styles.icon} name="search" size={24} />
-      </View>
-      {loading ? (
-        <ActivityIndicator
-          size="large"
-          color="#E94B3CFF"
-          style={{ marginTop: 20 }}
+        <FlatList
+          data={products}
+          renderItem={({ item }) => <Data data={item} />}
         />
-      ) : (
-        <FlatList data={data} renderItem={({ item }) => <Data data={item} />} />
-      )}
+      </View>
     </View>
   );
 }
@@ -62,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     position: "relative",
-    backgroundColor: "red",
+    backgroundColor: "blue",
   },
   input: {
     flex: 1,
