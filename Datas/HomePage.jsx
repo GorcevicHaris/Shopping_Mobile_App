@@ -4,33 +4,45 @@ import {
   StyleSheet,
   TextInput,
   FlatList,
-  ActivityIndicator,
   Text,
   Dimensions,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import axios from "axios";
 import Data from "../components/Data";
 import products from "../Products/Produtcs.json";
-console.log("products", products);
+
 function HomePage() {
+  const [search, setSearch] = useState("");
+
+  const filteredProducts = products.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <View style={styles.container1}>
       <View style={{ flexDirection: "column" }}>
         <View style={{ flexDirection: "row" }}>
-          <TextInput style={styles.input} />
+          <TextInput
+            value={search}
+            onChangeText={setSearch}
+            style={styles.input}
+            placeholder="Search"
+            placeholderTextColor="white"
+          />
           <Feather style={styles.icon} name="search" size={24} />
         </View>
         <FlatList
           numColumns={windowWidth > 700 ? 2 : 1}
           columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : undefined}
-          data={products}
-          renderItem={({ item }) => <Data key={item} data={item} />}
+          data={filteredProducts}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <Data key={item.id} data={item} />}
         />
       </View>
     </View>
   );
 }
+
 const windowWidth = Dimensions.get("window").width;
 
 export default HomePage;

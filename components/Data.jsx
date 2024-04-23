@@ -11,6 +11,7 @@ import {
 export default function Data({ data }) {
   return (
     <View style={styles.container}>
+      <Text>{data.title}</Text>
       <Image style={styles.image} source={{ uri: data.imageURL }}></Image>
     </View>
   );
