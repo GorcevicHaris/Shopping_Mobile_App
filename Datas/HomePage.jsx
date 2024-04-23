@@ -6,6 +6,7 @@ import {
   FlatList,
   Text,
   Dimensions,
+  StatusBar,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
@@ -13,11 +14,15 @@ import products from "../Products/Produtcs.json";
 
 function HomePage() {
   const [search, setSearch] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const filteredProducts = products.filter((item) =>
-    item.title.toLowerCase().includes(search.toLowerCase())
-  );
-
+  function onFilteredProducts() {
+    setFilteredProducts(
+      products.filter((data) =>
+        data.title.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }
   return (
     <View style={styles.container1}>
       <View style={{ flexDirection: "column" }}>
@@ -29,13 +34,17 @@ function HomePage() {
             placeholder="Search"
             placeholderTextColor="white"
           />
-          <Feather style={styles.icon} name="search" size={24} />
+          <Feather
+            onPress={onFilteredProducts}
+            style={styles.icon}
+            name="search"
+            size={24}
+          />
         </View>
         <FlatList
           numColumns={windowWidth > 700 ? 2 : 1}
-          columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : undefined}
+          columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : null}
           data={filteredProducts}
-          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <Data key={item.id} data={item} />}
         />
       </View>
