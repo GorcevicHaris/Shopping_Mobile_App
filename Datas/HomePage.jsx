@@ -6,6 +6,7 @@ import {
   FlatList,
   ActivityIndicator,
   Text,
+  Dimensions,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import axios from "axios";
@@ -15,17 +16,22 @@ console.log("products", products);
 function HomePage() {
   return (
     <View style={styles.container1}>
-      <View style={{ flexDirection: "row" }}>
-        <TextInput style={styles.input} />
-        <Feather style={styles.icon} name="search" size={24} />
+      <View style={{ flexDirection: "column" }}>
+        <View style={{ flexDirection: "row" }}>
+          <TextInput style={styles.input} />
+          <Feather style={styles.icon} name="search" size={24} />
+        </View>
         <FlatList
+          numColumns={windowWidth > 700 ? 2 : 1}
+          columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : undefined}
           data={products}
-          renderItem={({ item }) => <Data data={item} />}
+          renderItem={({ item }) => <Data key={item} data={item} />}
         />
       </View>
     </View>
   );
 }
+const windowWidth = Dimensions.get("window").width;
 
 export default HomePage;
 

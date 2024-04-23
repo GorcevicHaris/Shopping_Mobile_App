@@ -7,6 +7,7 @@ const Header = () => (
 );
 const gray = "#2D2926FF";
 const orange = "#E94B3CFF";
+
 const styles = StyleSheet.create({
   header: {
     height: 150,
