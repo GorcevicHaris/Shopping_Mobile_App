@@ -19,6 +19,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./HomePage";
 import Layout from "../Layout/Layout";
+import About from "../About";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const MyStack = () => {
           name="Home"
           component={Layout}
         />
+        <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   );

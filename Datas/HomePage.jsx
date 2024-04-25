@@ -16,26 +16,73 @@ function HomePage() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  function onFilteredProducts() {
+  // function onFilteredProducts(e) {
+  //   if (e.nativeEvent.key == "Backspace") {
+  //     setFilteredProducts(
+  //       products.filter((data) =>
+  //         data.title.toLowerCase().includes(search.toLowerCase())
+  //       )
+  //     );
+  //   }
+  // }
+  // function onHandlePress() {
+  //   setFilteredProducts(
+  //     products.filter((data) => data.title.toLowerCase().includes(search))
+  //   );
+  // }
+
+  function handleSearch() {
     setFilteredProducts(
       products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
   }
+
+  // useEffect(() => {
+  //   setFilteredProducts(
+  //     products.filter((data) =>
+  //       data.title.toLowerCase().includes(search.toLowerCase())
+  //     )
+  //   );
+  //   console.log(search);
+  // }, [search]);
+
+  // useEffect(() => {
+  //   document.addEventListener("keydown", (e) => {
+  //     if (e.keyCode === 46) {
+  //       console.log("first");
+  //     }
+  //   });
+  // }, [filteredProducts]);
+
+  // useEffect(() => {
+  //   if (search == filteredProducts) {
+  //     setFilteredProducts(filteredProducts);
+  //   } else {
+  //     setFilteredProducts(products);
+  //   }
+  // }, [search]);
+
   return (
     <View style={styles.container1}>
+      <StatusBar />
       <View style={{ flexDirection: "column" }}>
         <View style={{ flexDirection: "row" }}>
           <TextInput
             value={search}
-            onChangeText={setSearch}
+            onChangeText={(e) => {
+              setSearch(e.toLowerCase());
+            }}
+            onKeyPress={(e) => {
+              e.nativeEvent.key === "Backspace" && handleSearch();
+            }}
             style={styles.input}
             placeholder="Search"
             placeholderTextColor="white"
           />
           <Feather
-            onPress={onFilteredProducts}
+            onPress={handleSearch}
             style={styles.icon}
             name="search"
             size={24}
@@ -46,6 +93,7 @@ function HomePage() {
           columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : null}
           data={filteredProducts}
           renderItem={({ item }) => <Data key={item.id} data={item} />}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </View>
