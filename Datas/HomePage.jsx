@@ -63,6 +63,9 @@ function HomePage() {
   //     setFilteredProducts(products);
   //   }
   // }, [search]);
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [filteredProducts]);
 
   return (
     <View style={styles.container1}>
@@ -73,9 +76,6 @@ function HomePage() {
             value={search}
             onChangeText={(e) => {
               setSearch(e.toLowerCase());
-            }}
-            onKeyPress={(e) => {
-              e.nativeEvent.key === "Backspace" && handleSearch();
             }}
             style={styles.input}
             placeholder="Search"
