@@ -16,20 +16,13 @@ function HomePage() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  // function onFilteredProducts(e) {
-  //   if (e.nativeEvent.key == "Backspace") {
-  //     setFilteredProducts(
-  //       products.filter((data) =>
-  //         data.title.toLowerCase().includes(search.toLowerCase())
-  //       )
-  //     );
-  //   }
-  // }
-  // function onHandlePress() {
-  //   setFilteredProducts(
-  //     products.filter((data) => data.title.toLowerCase().includes(search))
-  //   );
-  // }
+  function onFilteredProducts() {
+    setFilteredProducts(
+      products.filter((data) =>
+        data.title.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }
 
   function handleSearch() {
     setFilteredProducts(
@@ -38,34 +31,6 @@ function HomePage() {
       )
     );
   }
-
-  // useEffect(() => {
-  //   setFilteredProducts(
-  //     products.filter((data) =>
-  //       data.title.toLowerCase().includes(search.toLowerCase())
-  //     )
-  //   );
-  //   console.log(search);
-  // }, [search]);
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", (e) => {
-  //     if (e.keyCode === 46) {
-  //       console.log("first");
-  //     }
-  //   });
-  // }, [filteredProducts]);
-
-  // useEffect(() => {
-  //   if (search == filteredProducts) {
-  //     setFilteredProducts(filteredProducts);
-  //   } else {
-  //     setFilteredProducts(products);
-  //   }
-  // }, [search]);
-  useEffect(() => {
-    setFilteredProducts(products);
-  }, [filteredProducts]);
 
   return (
     <View style={styles.container1}>
@@ -77,6 +42,7 @@ function HomePage() {
             onChangeText={(e) => {
               setSearch(e.toLowerCase());
             }}
+            onKeyPress={onFilteredProducts}
             style={styles.input}
             placeholder="Search"
             placeholderTextColor="white"
