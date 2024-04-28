@@ -18,7 +18,7 @@ function HomePage() {
 
   function onFilteredProducts({ nativeEvent }) {
     if (nativeEvent.key === "Backspace") {
-      const modifiedSearch = search.substring(0, search.length - 1); // Ukloni poslednji karakter iz pretrage
+      const modifiedSearch = search.slice(0, -1);
       setFilteredProducts(
         products.filter((data) =>
           data.title.toLowerCase().includes(modifiedSearch.toLowerCase())
