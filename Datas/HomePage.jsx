@@ -17,17 +17,20 @@ function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   function onFilteredProducts({ nativeEvent }) {
-    setFilteredProducts(
-      products.filter((data) =>
-        data.title.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (nativeEvent.key === "Backspace") {
+      const modifiedSearch = search.substring(0, search.length - 1); // Ukloni poslednji karakter iz pretrage
+      setFilteredProducts(
+        products.filter((data) =>
+          data.title.toLowerCase().includes(modifiedSearch.toLowerCase())
+        )
+      );
+    }
   }
   console.log("produkti", products);
   console.log("filtriraniprodukti", filteredProducts);
   function handleSearch() {
     setFilteredProducts(
-      filteredProducts.filter((data) =>
+      products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
