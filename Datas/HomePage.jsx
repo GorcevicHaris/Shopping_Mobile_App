@@ -16,17 +16,18 @@ function HomePage() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  function onFilteredProducts() {
+  function onFilteredProducts({ nativeEvent }) {
     setFilteredProducts(
       products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
   }
-
+  console.log("produkti", products);
+  console.log("filtriraniprodukti", filteredProducts);
   function handleSearch() {
     setFilteredProducts(
-      products.filter((data) =>
+      filteredProducts.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
