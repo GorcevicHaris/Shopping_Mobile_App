@@ -16,54 +16,33 @@ function HomePage() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  function onFilteredProducts({ nativeEvent }) {
-    if (nativeEvent.key === "Backspace") {
-      const modifiedSearch = search.slice(0, -1);
-      setFilteredProducts(
-        products.filter((data) =>
-          data.title.toLowerCase().includes(modifiedSearch.toLowerCase())
-        )
-      );
-    }
-  }
-  console.log("produkti", products);
-  console.log("filtriraniprodukti", filteredProducts);
-  function handleSearch() {
+  useEffect(() => {
     setFilteredProducts(
       products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
-  }
+  }, [search]);
 
   return (
     <View style={styles.container1}>
       <StatusBar />
-      <View style={{ flexDirection: "column" }}>
+      <View style={{ flexDirection: "column", gap: 30 }}>
         <View style={{ flexDirection: "row" }}>
           <TextInput
             value={search}
-            onChangeText={(e) => {
-              setSearch(e.toLowerCase());
-            }}
-            onKeyPress={onFilteredProducts}
+            onChangeText={(e) => setSearch(e.toLowerCase())}
             style={styles.input}
             placeholder="Search"
-            placeholderTextColor="white"
-          />
-          <Feather
-            onPress={handleSearch}
-            style={styles.icon}
-            name="search"
-            size={24}
+            placeholderTextColor="#2D2926F"
           />
         </View>
         <FlatList
           numColumns={windowWidth > 700 ? 2 : 1}
-          columnWrapperStyle={windowWidth > 700 ? { gap: 10 } : null}
           data={filteredProducts}
           renderItem={({ item }) => <Data key={item.id} data={item} />}
           keyExtractor={(item) => item.id.toString()}
+          ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
         />
       </View>
     </View>
@@ -73,27 +52,24 @@ function HomePage() {
 const windowWidth = Dimensions.get("window").width;
 
 export default HomePage;
-
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
     padding: 20,
-    position: "relative",
-    backgroundColor: "blue",
+    backgroundColor: "#f3f3f3",
   },
   input: {
     flex: 1,
-    height: 40,
+    height: 70,
     borderWidth: 1,
     borderColor: "gray",
-    fontSize: 16,
-    padding: 7,
-    color: "white",
-  },
-  icon: {
-    position: "absolute",
-    right: 12,
-    top: 10,
-    color: "#E94B3CFF",
+    fontSize: 20,
+    color: siva,
+    borderRadius: 15,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

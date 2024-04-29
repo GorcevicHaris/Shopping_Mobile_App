@@ -6,32 +6,60 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 
 export default function Data({ data }) {
   return (
     <View style={styles.container}>
-      <Text>{data.title}</Text>
+      {/* <Text>{data.title}</Text> */}
       <Image style={styles.image} source={{ uri: data.imageURL }}></Image>
+      <View style={styles.buyinfo}>
+        <Text>300.00 RSD</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text children="Buy" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 const windowWidth = Dimensions.get("window").width;
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: "column",
-    position: "relative",
-    aspectRatio: windowWidth > 700 ? "9.7/16" : "10/16",
+    // aspectRatio: windowWidth > 700 ? "9.7/16" : "10/16",
+    // backgroundColor: "#dbd9d9",
+    minHeight: 10,
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    padding: 20,
+    borderRadius: 15,
+    gap: 20,
   },
-  text: {
-    fontSize: windowWidth > 600 ? 35 : 20,
-    borderWidth: 1,
-  },
+  // text: {
+  //   fontSize: windowWidth > 600 ? 35 : 20,
+  //   borderWidth: 1,
+  // },
   image: {
-    justifyContent: "center",
     objectFit: "contain",
-    width: "100%",
-    height: "100%",
+    borderRadius: 25,
+    height: 450,
+    width: 350,
+    objectFit: "cover",
+    alignSelf: "center",
+  },
+  buyinfo: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "gray",
+    paddingHorizontal: 40,
+    paddingVertical: 20,
   },
 });

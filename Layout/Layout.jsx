@@ -13,10 +13,13 @@ const Layout = ({ children }) => {
     </View>
   );
 };
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#f3f3f3",
   },
   content: {
     flex: 1,

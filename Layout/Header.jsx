@@ -9,7 +9,7 @@ function Header() {
   return (
     <View style={styles.header}>
       <TouchableOpacity>
-        <Text style={styles.headerText}>Haringan-Shop</Text>
+        <Text style={styles.headerText}>Haringan</Text>
       </TouchableOpacity>
     </View>
   );
@@ -25,13 +25,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: gray,
     paddingTop: 40,
+    borderBottomLeftRadius: 30,
+    borderBottomEndRadius: 30,
   },
   headerText: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
     letterSpacing: 5,
     fontWeight: "900",
     color: orange,
+    textTransform: "uppercase",
   },
 });
 

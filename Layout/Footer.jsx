@@ -16,6 +16,7 @@ const Footer = () => (
 const size = 37;
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
+
 const styles = StyleSheet.create({
   footer: {
     height: 90,
