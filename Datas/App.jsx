@@ -20,7 +20,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./HomePage";
 import Layout from "../Layout/Layout";
 import About from "../About";
-
+import Favorites from "./Favorites/FavoritesPage";
+import Basket from "./Basket/Basket";
+import Profile from "./Profile/Profile";
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
@@ -32,7 +34,9 @@ const MyStack = () => {
           name="Home"
           component={Layout}
         />
-        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="favorites" component={Favorites} />
+        <Stack.Screen name="basket" component={Basket} />
+        <Stack.Screen name="profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

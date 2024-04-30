@@ -17,7 +17,12 @@ export default function Data({ data }) {
       <View style={styles.buyinfo}>
         <Text>300.00 RSD</Text>
         <TouchableOpacity style={styles.button}>
-          <Text children="Buy" />
+          <Text
+            style={{
+              color: "white",
+            }}
+            children="Buy"
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -35,10 +40,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
-    padding: 20,
     borderRadius: 15,
     gap: 20,
+    padding: 20,
+    borderBottomColor: orange,
+    borderBottomWidth: 10,
+    borderRightWidth: 10,
+    borderRightColor: orange,
   },
+
   // text: {
   //   fontSize: windowWidth > 600 ? 35 : 20,
   //   borderWidth: 1,
@@ -58,8 +68,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "gray",
-    paddingHorizontal: 40,
-    paddingVertical: 20,
+    backgroundColor: orange,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 10,
   },
 });

@@ -62,14 +62,12 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 70,
-    borderWidth: 1,
-    borderColor: "gray",
+    height: 60,
+    borderWidth: 0.2,
+    borderColor: orange,
     fontSize: 20,
     color: siva,
     borderRadius: 15,
     padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

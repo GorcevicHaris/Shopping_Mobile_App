@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: gray,
     paddingTop: 40,
-    borderBottomLeftRadius: 30,
-    borderBottomEndRadius: 30,
   },
   headerText: {
     fontSize: 30,
