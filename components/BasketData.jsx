@@ -11,21 +11,20 @@ import {
 import { CustomContext } from "../Context/ContextProvider";
 
 export default function Data({ data }) {
-  const { setSendDataFunction, sendDataFunction } = useContext(CustomContext);
-  function handleBuy(item) {
-    setSendDataFunction((data) => [...data, item]);
-    console.log(sendDataFunction, "sended");
-  }
+  //   function handleBuy(item) {
+  //     setSendDataFunction((data) => [...data, item]);
+  //     console.log(sendDataFunction, "sended");
+  //   }
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <Text>300.00 RSD</Text>
-        <TouchableOpacity style={styles.button}>
+        {/* <TouchableOpacity style={styles.button}>
           <Text onPress={() => handleBuy(data)} style={{ color: "white" }}>
             Buy
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
