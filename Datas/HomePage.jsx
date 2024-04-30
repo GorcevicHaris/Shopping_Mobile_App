@@ -24,6 +24,8 @@ function HomePage() {
     );
   }, [search]);
 
+  function handleFavorite(data) {}
+
   return (
     <View style={styles.container1}>
       <StatusBar />
@@ -34,7 +36,7 @@ function HomePage() {
             onChangeText={(e) => setSearch(e.toLowerCase())}
             style={styles.input}
             placeholder="Search"
-            placeholderTextColor="#2D2926F"
+            placeholderTextColor={siva}
           />
         </View>
         <FlatList
