@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 function Basket() {
   return (
     <View>
-      <Text>sdf</Text>
+      <Text children="ad" />
     </View>
   );
 }
