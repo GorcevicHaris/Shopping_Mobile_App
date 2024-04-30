@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
-import { CustomContext } from "../Context/ContextProvider";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function Data({ data }) {
-  //   function handleBuy(item) {
-  //     setSendDataFunction((data) => [...data, item]);
-  //     console.log(sendDataFunction, "sended");
-  //   }
+export default function BasketData({ data }) {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
-        <Text>300.00 RSD</Text>
-        {/* <TouchableOpacity style={styles.button}>
-          <Text onPress={() => handleBuy(data)} style={{ color: "white" }}>
-            Buy
+        <TouchableOpacity style={styles.button2}>
+          <Text
+            style={{
+              color: "white",
+            }}
+          >
+            -
           </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text
+            style={{
+              color: "white",
+            }}
+          >
+            +
+          </Text>
+        </TouchableOpacity>
+        <Text>{data.price}$</Text>
       </View>
     </View>
   );
 }
+
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
 
@@ -63,9 +63,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
+    backgroundColor: orange,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+  button2: {
     backgroundColor: siva,
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10,
+  },
+  miniContainer: {
+    height: 50,
+    width: 50,
+    backgroundColor: "red",
   },
 });

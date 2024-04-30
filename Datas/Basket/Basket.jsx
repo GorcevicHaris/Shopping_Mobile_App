@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { CustomContext } from "../../Context/ContextProvider";
 import Data from "../../components/Data";
 import BasketData from "../../components/BasketData";
 
 function Basket() {
   const { sendDataFunction } = useContext(CustomContext);
-
   return (
     <View style={styles.container1}>
       <View style={{ flexDirection: "column", gap: 30 }}>
@@ -15,12 +21,13 @@ function Basket() {
           data={sendDataFunction}
           renderItem={({ item }) => <BasketData key={item.id} data={item} />}
           keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
+          ItemSeparatorComponent={() => <View style={{ height: 50 }}></View>}
         />
       </View>
     </View>
   );
 }
+const windowWidth = Dimensions.get("window").width;
 
 export default Basket;
 const orange = "#E94B3CFF";
