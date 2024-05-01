@@ -21,7 +21,21 @@ function Basket() {
           data={sendDataFunction}
           renderItem={({ item }) => <BasketData key={item.id} data={item} />}
           keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 50 }}></View>}
+          ItemSeparatorComponent={() => (
+            <View key={""} style={{ height: 50 }}></View>
+          )}
+          ListFooterComponent={
+            <View>
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color: "white" }}>Buy and check Bill</Text>
+              </TouchableOpacity>
+              <View style={{ width: 200, height: 400, backgroundColor: "red" }}>
+                {sendDataFunction.map((el) => (
+                  <Text>{el.price * 2}</Text>
+                ))}
+              </View>
+            </View>
+          }
         />
       </View>
     </View>
@@ -38,5 +52,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#f3f3f3",
+  },
+  button: {
+    backgroundColor: orange,
+    paddingHorizontal: 70,
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
   },
 });

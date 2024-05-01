@@ -20,7 +20,7 @@ export default function Data({ data }) {
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
-        <Text>300.00 RSD</Text>
+        <Text>{data.price}$</Text>
         <TouchableOpacity style={styles.button}>
           <Text onPress={() => handleBuy(data)} style={{ color: "white" }}>
             Buy

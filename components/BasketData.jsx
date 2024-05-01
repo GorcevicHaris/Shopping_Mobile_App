@@ -1,11 +1,24 @@
+import { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default function BasketData({ data }) {
+  const [quantity, setQuantity] = useState(0);
+
+  function onIncrement() {
+    if (quantity < 10) {
+      setQuantity(quantity + 1);
+    }
+  }
+  function onDecrement() {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  }
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
-        <TouchableOpacity style={styles.button2}>
+        <TouchableOpacity onPress={onDecrement} style={styles.button2}>
           <Text
             style={{
               color: "white",
@@ -14,7 +27,8 @@ export default function BasketData({ data }) {
             -
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <Text>{quantity}</Text>
+        <TouchableOpacity onPress={onIncrement} style={styles.button}>
           <Text
             style={{
               color: "white",
