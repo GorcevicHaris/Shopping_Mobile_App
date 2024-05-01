@@ -21,10 +21,8 @@ export default function Data({ data }) {
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <Text>{data.price}$</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text onPress={() => handleBuy(data)} style={{ color: "white" }}>
-            Buy
-          </Text>
+        <TouchableOpacity onPress={() => handleBuy(data)} style={styles.button}>
+          <Text style={{ color: "white" }}>Buy</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -13,6 +13,12 @@ import BasketData from "../../components/BasketData";
 
 function Basket() {
   const { sendDataFunction } = useContext(CustomContext);
+
+  const totalPrice = sendDataFunction.reduce(
+    (acc, curr) => acc + curr.price,
+    0
+  );
+
   return (
     <View style={styles.container1}>
       <View style={{ flexDirection: "column", gap: 30 }}>
@@ -21,9 +27,7 @@ function Basket() {
           data={sendDataFunction}
           renderItem={({ item }) => <BasketData key={item.id} data={item} />}
           keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={() => (
-            <View key={""} style={{ height: 50 }}></View>
-          )}
+          ItemSeparatorComponent={() => <View style={{ height: 50 }}></View>}
           ListFooterComponent={
             <View>
               <TouchableOpacity style={styles.button}>
@@ -31,8 +35,9 @@ function Basket() {
               </TouchableOpacity>
               <View style={{ width: 200, height: 400, backgroundColor: "red" }}>
                 {sendDataFunction.map((el) => (
-                  <Text>{el.price * 2}</Text>
+                  <Text key={el.id}>{el.price}</Text>
                 ))}
+                <Text>Total Price: {totalPrice}</Text>
               </View>
             </View>
           }
