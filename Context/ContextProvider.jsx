@@ -4,6 +4,7 @@ const CustomContext = createContext();
 export function ContextProvider({ children }) {
   const [profileData, setProfileData] = useState(null);
   const [sendDataFunction, setSendDataFunction] = useState([]);
+  const [totalPrice, setTotalPrice] = useState([]);
 
   return (
     <CustomContext.Provider
@@ -12,6 +13,8 @@ export function ContextProvider({ children }) {
         setProfileData,
         sendDataFunction,
         setSendDataFunction,
+        totalPrice,
+        setTotalPrice,
       }}
     >
       {children}

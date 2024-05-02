@@ -13,9 +13,17 @@ import { CustomContext } from "../Context/ContextProvider";
 export default function Data({ data }) {
   const { setSendDataFunction, sendDataFunction } = useContext(CustomContext);
   function handleBuy(item) {
-    setSendDataFunction((data) => [...data, item]);
-    console.log(sendDataFunction, "sended");
+    if (alreadyInCart(item)) {
+      alert("vec dodat");
+    } else {
+      setSendDataFunction((data) => [...data, item]);
+    }
   }
+
+  function alreadyInCart(item) {
+    return sendDataFunction.some((cartItem) => cartItem.id === item.id);
+  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />

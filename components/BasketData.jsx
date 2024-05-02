@@ -1,50 +1,41 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { CustomContext } from "../Context/ContextProvider";
 
-export default function BasketData({ data }) {
-  const [quantity, setQuantity] = useState(0);
+const BasketData = ({ data }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { totalPrice, setTotalPrice } = useContext(CustomContext);
 
-  function onIncrement() {
+  const onIncrement = () => {
     if (quantity < 10) {
       setQuantity(quantity + 1);
+      setTotalPrice(totalPrice + data.price);
     }
-  }
-  function onDecrement() {
-    if (quantity > 0) {
+  };
+
+  const onDecrement = () => {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
+      setTotalPrice(totalPrice - data.price);
     }
-  }
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <TouchableOpacity onPress={onDecrement} style={styles.button2}>
-          <Text
-            style={{
-              color: "white",
-            }}
-          >
-            -
-          </Text>
+          <Text style={styles.buttonText}>-</Text>
         </TouchableOpacity>
         <Text>{quantity}</Text>
         <TouchableOpacity onPress={onIncrement} style={styles.button}>
-          <Text
-            style={{
-              color: "white",
-            }}
-          >
-            +
-          </Text>
+          <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
         <Text>{data.price}$</Text>
       </View>
     </View>
   );
-}
-
-const orange = "#E94B3CFF";
-const siva = "#2D2926FF";
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -57,13 +48,12 @@ const styles = StyleSheet.create({
     gap: 20,
     padding: 20,
     borderBottomWidth: 10,
-    borderBottomColor: siva,
+    borderBottomColor: "#2D2926FF",
     borderRightWidth: 10,
-    borderRightColor: siva,
+    borderRightColor: "#2D2926FF",
     flexDirection: "column",
   },
   image: {
-    objectFit: "contain",
     borderRadius: 25,
     height: 450,
     width: 350,
@@ -72,25 +62,24 @@ const styles = StyleSheet.create({
   },
   buyinfo: {
     flexDirection: "row",
-    flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
   },
   button: {
-    backgroundColor: orange,
+    backgroundColor: "#E94B3CFF",
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10,
   },
   button2: {
-    backgroundColor: siva,
+    backgroundColor: "#2D2926FF",
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10,
   },
-  miniContainer: {
-    height: 50,
-    width: 50,
-    backgroundColor: "red",
+  buttonText: {
+    color: "white",
   },
 });
+
+export default BasketData;
