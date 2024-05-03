@@ -14,7 +14,6 @@ export default function Basket() {
   const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
-
   useEffect(() => {
     setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   }, []);
@@ -34,16 +33,15 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
-            setFakeQuantity={(quantity) => {
-              console.log(quantity, "quantity");
+            setFakeQuantity={(quantity) =>
               setSendDataFunction(
-                sendDataFunction.map((el) => {
-                  return el.id === item.id
-                    ? { ...el, fakeQuantity: quantity }
-                    : el;
-                })
-              );
-            }}
+                sendDataFunction.map((data) =>
+                  data.id === item.id
+                    ? { ...data, fakeQuantity: quantity }
+                    : data
+                )
+              )
+            }
             key={item.id}
             data={item}
           />
