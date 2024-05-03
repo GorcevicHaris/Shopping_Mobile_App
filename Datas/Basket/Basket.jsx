@@ -54,23 +54,39 @@ export default function Basket() {
         <View style={styles.totalContainer}>
           {sendDataFunction.map((el) => (
             <View key={el.id}>
-              <Text>{el.price}</Text>
-              <Text>{el.fakeQuantity}</Text>
-              <Text>Name:{el.name}</Text>
+              <Text style={{ color: "white" }}>
+                Quantity:&nbsp;
+                {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;
+                {el.fakeQuantity}x
+              </Text>
             </View>
           ))}
-          <Text>Total Price: {totalPrice}$</Text>
+          <Text style={{ color: "white" }}>
+            Total Price: {totalPrice.toFixed(2)}$
+          </Text>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
             style={styles.pay}
           >
-            <Text>Pay</Text>
+            <Text
+              style={{
+                color: siva,
+              }}
+            >
+              Pay
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
             style={styles.exit}
           >
-            <Text>Exit</Text>
+            <Text
+              style={{
+                color: "white",
+              }}
+            >
+              Exit
+            </Text>
           </TouchableOpacity>
         </View>
       )}
@@ -97,12 +113,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   totalContainer: {
-    width: 250,
-    minHeight: 400,
+    width: 300,
+    minHeight: 500,
     position: "absolute",
-    top: 150,
-    left: 100,
-    backgroundColor: orange,
+    top: 130,
+    left: 75,
+    backgroundColor: siva,
     borderRadius: 20,
     padding: 20,
   },
@@ -112,21 +128,23 @@ const styles = StyleSheet.create({
   exit: {
     position: "absolute",
     right: 10,
-    bottom: 10,
-    backgroundColor: "pink",
+    top: 10,
+    backgroundColor: "red",
     width: 50,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
   },
   pay: {
     position: "absolute",
     left: 10,
     bottom: 10,
-    backgroundColor: "pink",
-    width: 50,
+    backgroundColor: "lightgreen",
+    width: 70,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
   },
 });
