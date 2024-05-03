@@ -35,10 +35,13 @@ export default function Basket() {
         renderItem={({ item }) => (
           <BasketData
             setFakeQuantity={(quantity) => {
+              console.log(quantity, "quantity");
               setSendDataFunction(
-                sendDataFunction.map((el) =>
-                  el.id === item.id ? { ...el, fakeQuantity: quantity } : el
-                )
+                sendDataFunction.map((el) => {
+                  return el.id === item.id
+                    ? { ...el, fakeQuantity: quantity }
+                    : el;
+                })
               );
             }}
             key={item.id}
