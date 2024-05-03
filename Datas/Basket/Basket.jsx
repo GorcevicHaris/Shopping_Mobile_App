@@ -10,11 +10,11 @@ import {
 import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
 
-const Basket = () => {
+export default function Basket() {
   const { sendDataFunction, setTotalPrice, totalPrice } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
-
+  const [fakeQuantity, setFakeQuantity] = useState(1);
   useEffect(() => {
     setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   }, []);
@@ -32,7 +32,13 @@ const Basket = () => {
       <FlatList
         numColumns={windowWidth > 700 ? 2 : 1}
         data={sendDataFunction}
-        renderItem={({ item }) => <BasketData key={item.id} data={item} />}
+        renderItem={({ item }) => (
+          <BasketData
+            key={item.id}
+            data={item}
+            setFakeQuantity={setFakeQuantity}
+          />
+        )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListFooterComponent={renderFooter(sendDataFunction, totalPrice)}
@@ -40,9 +46,12 @@ const Basket = () => {
       {showBill && (
         <View style={styles.totalContainer}>
           {sendDataFunction.map((el) => (
-            <Text key={el.id}>{el.price}</Text>
+            <View>
+              <Text key={el.id}>{el.price}</Text>
+            </View>
           ))}
           <Text>Total Price: {totalPrice}</Text>
+          <Text>Quantity : {fakeQuantity}</Text>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
             style={styles.exit}
@@ -53,7 +62,7 @@ const Basket = () => {
       )}
     </View>
   );
-};
+}
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -94,5 +103,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default Basket;

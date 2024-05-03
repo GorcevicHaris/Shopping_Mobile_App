@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 
-const BasketData = ({ data }) => {
+const BasketData = ({ data, setFakeQuantity }) => {
   const [quantity, setQuantity] = useState(1);
   const { totalPrice, setTotalPrice } = useContext(CustomContext);
 
@@ -10,12 +10,14 @@ const BasketData = ({ data }) => {
     if (quantity < 10) {
       setQuantity(quantity + 1);
       setTotalPrice(totalPrice + data.price);
+      setFakeQuantity(quantity + 1);
     }
   };
 
   const onDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+      setFakeQuantity(quantity - 1);
       setTotalPrice(totalPrice - data.price);
     }
   };
