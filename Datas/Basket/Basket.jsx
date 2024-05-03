@@ -62,6 +62,12 @@ export default function Basket() {
           <Text>Total Price: {totalPrice}$</Text>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
+            style={styles.pay}
+          >
+            <Text>Pay</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setShowBill(false)}
             style={styles.exit}
           >
             <Text>Exit</Text>
@@ -106,6 +112,16 @@ const styles = StyleSheet.create({
   exit: {
     position: "absolute",
     right: 10,
+    bottom: 10,
+    backgroundColor: "pink",
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pay: {
+    position: "absolute",
+    left: 10,
     bottom: 10,
     backgroundColor: "pink",
     width: 50,
