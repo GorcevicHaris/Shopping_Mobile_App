@@ -56,9 +56,10 @@ export default function Basket() {
             <View key={el.id}>
               <Text>{el.price}</Text>
               <Text>{el.fakeQuantity}</Text>
+              <Text>Name:{el.name}</Text>
             </View>
           ))}
-          <Text>Total Price: {totalPrice}</Text>
+          <Text>Total Price: {totalPrice}$</Text>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
             style={styles.exit}
@@ -72,7 +73,8 @@ export default function Basket() {
 }
 
 const windowWidth = Dimensions.get("window").width;
-
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -94,7 +96,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 150,
     left: 100,
-    backgroundColor: "red",
+    backgroundColor: orange,
+    borderRadius: 20,
+    padding: 20,
   },
   separator: {
     height: 50,
