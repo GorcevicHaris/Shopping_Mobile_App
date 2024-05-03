@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 
-const BasketData = ({ data, setFakeQuantity }) => {
+const BasketData = ({ data, setFakeQuantity, removeProduct }) => {
   const [quantity, setQuantity] = useState(1);
   const { totalPrice, setTotalPrice } = useContext(CustomContext);
 
@@ -26,6 +26,12 @@ const BasketData = ({ data, setFakeQuantity }) => {
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
+        <TouchableOpacity
+          onPress={() => removeProduct(data.id)}
+          style={styles.button3}
+        >
+          <Text style={styles.buttonText}>Remove</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={onDecrement} style={styles.button2}>
           <Text style={styles.buttonText}>-</Text>
         </TouchableOpacity>
@@ -75,6 +81,12 @@ const styles = StyleSheet.create({
   },
   button2: {
     backgroundColor: "#2D2926FF",
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+  button3: {
+    backgroundColor: "red",
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10,

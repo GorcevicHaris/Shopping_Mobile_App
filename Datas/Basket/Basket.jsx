@@ -33,6 +33,7 @@ export default function Basket() {
       setShowAlert(false);
     }, 2500);
   };
+
   return (
     <View style={styles.container}>
       {showAlert && (
@@ -51,6 +52,11 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
+            removeProduct={(dataItem) =>
+              setSendDataFunction((prev) =>
+                prev.filter((item) => item.id !== dataItem)
+              )
+            }
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
                 sendDataFunction.map((data) =>
@@ -94,7 +100,6 @@ export default function Basket() {
           <TouchableOpacity
             onPress={() => {
               setShowBill(false);
-              setShowAlert(true);
             }}
             style={styles.exit}
           >
@@ -171,7 +176,7 @@ const styles = StyleSheet.create({
     color: "white",
     position: "absolute",
     top: 20,
-    left: 75,
+    left: 65,
     width: 300,
     zIndex: 10,
   },
