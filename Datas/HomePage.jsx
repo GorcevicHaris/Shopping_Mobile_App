@@ -11,11 +11,20 @@ import {
 import { Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import products from "../Products/Produtcs.json";
-
+import axios from "axios";
 function HomePage() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
+  useEffect(() => {
+    function getData() {
+      axios
+        .get("http://localhost:4005/product")
+        .then((res) => console.log(res, "uspesno"))
+        .catch((err) => console.log(err, "neuspesno"));
+    }
+    getData();
+  }, []);
   useEffect(() => {
     setFilteredProducts(
       products.filter((data) =>
