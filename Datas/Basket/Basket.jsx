@@ -11,10 +11,10 @@ import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
 
 export default function Basket() {
-  const { sendDataFunction, setTotalPrice, totalPrice } =
+  const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
-  const [fakeQuantity, setFakeQuantity] = useState(1);
+
   useEffect(() => {
     setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   }, []);
@@ -34,9 +34,15 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
+            setFakeQuantity={(quantity) => {
+              setSendDataFunction(
+                sendDataFunction.map((el) =>
+                  el.id === item.id ? { ...el, fakeQuantity: quantity } : el
+                )
+              );
+            }}
             key={item.id}
             data={item}
-            setFakeQuantity={setFakeQuantity}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
@@ -46,12 +52,12 @@ export default function Basket() {
       {showBill && (
         <View style={styles.totalContainer}>
           {sendDataFunction.map((el) => (
-            <View>
-              <Text key={el.id}>{el.price}</Text>
+            <View key={el.id}>
+              <Text>{el.price}</Text>
+              <Text>{el.fakeQuantity}</Text>
             </View>
           ))}
           <Text>Total Price: {totalPrice}</Text>
-          <Text>Quantity : {fakeQuantity}</Text>
           <TouchableOpacity
             onPress={() => setShowBill(false)}
             style={styles.exit}

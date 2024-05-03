@@ -9,8 +9,8 @@ const BasketData = ({ data, setFakeQuantity }) => {
   const onIncrement = () => {
     if (quantity < 10) {
       setQuantity(quantity + 1);
-      setTotalPrice(totalPrice + data.price);
       setFakeQuantity(quantity + 1);
+      setTotalPrice(totalPrice + data.price);
     }
   };
 
