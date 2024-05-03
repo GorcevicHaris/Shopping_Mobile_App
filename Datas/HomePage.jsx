@@ -20,7 +20,7 @@ function HomePage() {
     function getData() {
       axios
         .get("http://localhost:4005/product")
-        .then((res) => console.log(res, "uspesno"))
+        .then((res) => console.log(res.data, "uspesno"))
         .catch((err) => console.log(err, "neuspesno"));
     }
     getData();
@@ -32,8 +32,6 @@ function HomePage() {
       )
     );
   }, [search]);
-
-  function handleFavorite(data) {}
 
   return (
     <View style={styles.container1}>
