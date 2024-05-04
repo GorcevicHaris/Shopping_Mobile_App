@@ -33,7 +33,17 @@ export default function Basket() {
       setShowAlert(false);
     }, 2500);
   };
-
+  const removeProduct = (dataItem) => {
+    const removedProduct = sendDataFunction.find(
+      (item) => item.id === dataItem
+    );
+    if (removedProduct) {
+      setSendDataFunction((prev) =>
+        prev.filter((item) => item.id !== dataItem)
+      );
+      setTotalPrice(0);
+    }
+  };
   return (
     <View style={styles.container}>
       {showAlert && (
@@ -52,11 +62,19 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
-            removeProduct={(dataItem) =>
-              setSendDataFunction((prev) =>
-                prev.filter((item) => item.id !== dataItem)
-              )
-            }
+            removeProduct={(dataItem) => {
+              const removedProduct = sendDataFunction.find(
+                (item) => item.id === dataItem
+              );
+              if (removedProduct) {
+                setSendDataFunction((prev) =>
+                  prev.filter((item) => item.id !== dataItem)
+                );
+                return setTotalPrice(
+                  (prevTotal) => prevTotal - removedProduct.price
+                );
+              }
+            }}
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
                 sendDataFunction.map((data) =>

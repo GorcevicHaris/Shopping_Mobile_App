@@ -26,6 +26,7 @@ export default function Data({ data }) {
 
   return (
     <View style={styles.container}>
+      <Text>{data.title}</Text>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <Text>{data.price}$</Text>

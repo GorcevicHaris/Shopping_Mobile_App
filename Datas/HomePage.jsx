@@ -10,29 +10,31 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
-import products from "../Products/Produtcs.json";
 import axios from "axios";
 function HomePage() {
   const [search, setSearch] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [search2, setSearch2] = useState("");
 
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     function getData() {
       axios
-        .get("http://localhost:4005/product")
-        .then((res) => console.log(res.data, "uspesno"))
+        .get("http://192.168.0.103:4005/product")
+        .then((res) => setProducts(res.data))
         .catch((err) => console.log(err, "neuspesno"));
     }
     getData();
   }, []);
   useEffect(() => {
+    console.log(search);
     setFilteredProducts(
       products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
   }, [search]);
-
+  console.log(products, "df", "sad");
   return (
     <View style={styles.container1}>
       <StatusBar />
@@ -40,15 +42,16 @@ function HomePage() {
         <View style={{ flexDirection: "row" }}>
           <TextInput
             value={search}
-            onChangeText={(e) => setSearch(e.toLowerCase())}
+            onChangeText={(e) => setSearch(e)}
             style={styles.input}
-            placeholder="Search"
+            placeholder="Search products"
             placeholderTextColor={siva}
           />
         </View>
+
         <FlatList
           numColumns={windowWidth > 700 ? 2 : 1}
-          data={filteredProducts}
+          data={filteredProducts ? filteredProducts : ""}
           renderItem={({ item }) => <Data key={item.id} data={item} />}
           keyExtractor={(item) => item.id.toString()}
           ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
@@ -57,7 +60,6 @@ function HomePage() {
     </View>
   );
 }
-
 const windowWidth = Dimensions.get("window").width;
 
 export default HomePage;
@@ -78,5 +80,6 @@ const styles = StyleSheet.create({
     color: siva,
     borderRadius: 15,
     padding: 10,
+    backgroundColor: "white",
   },
 });
