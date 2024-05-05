@@ -26,6 +26,28 @@ export default function Basket() {
     </View>
   );
 
+  const handleRemoveProduct = (dataItem) => {
+    // Find the removed item
+    const removedItem = sendDataFunction.find((item) => item.id === dataItem);
+    if (!removedItem) return;
+
+    // Calculate the total quantity of the removed item
+    const totalRemovedQuantity = sendDataFunction.reduce((total, item) => {
+      if (item.id === dataItem) {
+        return total + item.fakeQuantity;
+      }
+      return total;
+    }, 0);
+
+    // Subtract the total price (price * quantity) of the removed item from the total price
+    setTotalPrice(
+      (prevTotal) => prevTotal - removedItem.price * totalRemovedQuantity
+    );
+
+    // Remove all instances of the item from sendDataFunction
+    setSendDataFunction((prev) => prev.filter((item) => item.id !== dataItem));
+  };
+
   const handlePay = () => {
     setShowBill(false);
     setShowAlert(true);
@@ -33,17 +55,7 @@ export default function Basket() {
       setShowAlert(false);
     }, 2500);
   };
-  const removeProduct = (dataItem) => {
-    const removedProduct = sendDataFunction.find(
-      (item) => item.id === dataItem
-    );
-    if (removedProduct) {
-      setSendDataFunction((prev) =>
-        prev.filter((item) => item.id !== dataItem)
-      );
-      setTotalPrice(0);
-    }
-  };
+
   return (
     <View style={styles.container}>
       {showAlert && (
@@ -62,19 +74,7 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
-            removeProduct={(dataItem) => {
-              const removedProduct = sendDataFunction.find(
-                (item) => item.id === dataItem
-              );
-              if (removedProduct) {
-                setSendDataFunction((prev) =>
-                  prev.filter((item) => item.id !== dataItem)
-                );
-                return setTotalPrice(
-                  (prevTotal) => prevTotal - removedProduct.price
-                );
-              }
-            }}
+            removeProduct={handleRemoveProduct} // Updated function
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
                 sendDataFunction.map((data) =>
@@ -90,7 +90,7 @@ export default function Basket() {
         )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        ListFooterComponent={renderFooter(sendDataFunction, totalPrice)}
+        ListFooterComponent={renderFooter}
       />
       {showBill && (
         <View style={styles.totalContainer}>

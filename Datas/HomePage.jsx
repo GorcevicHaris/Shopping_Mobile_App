@@ -34,7 +34,7 @@ function HomePage() {
       )
     );
   }, [search]);
-  console.log(products, "df", "sad");
+  console.log(products, "df", "sfssdfdsSSd");
   return (
     <View style={styles.container1}>
       <StatusBar />
