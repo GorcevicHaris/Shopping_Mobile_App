@@ -26,7 +26,7 @@ export default function Data({ data }) {
 
   return (
     <View style={styles.container}>
-      <Text>{data.title}</Text>
+      <Text style={styles.textFamily}>{data.title}</Text>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <Text>{data.price}$</Text>
@@ -39,6 +39,7 @@ export default function Data({ data }) {
 }
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -50,17 +51,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     gap: 20,
     padding: 20,
-    borderBottomWidth: 10,
+    borderBottomWidth: 7,
     borderBottomColor: siva,
-    borderRightWidth: 10,
+    borderRightWidth: 7,
     borderRightColor: siva,
     flexDirection: "column",
+    marginBottom: 25,
   },
   image: {
     objectFit: "contain",
     borderRadius: 25,
     height: 450,
-    width: 350,
+    width: windowWidth > 400 ? 350 : 300,
     objectFit: "cover",
     alignSelf: "center",
   },
@@ -76,4 +78,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 10,
   },
+  textFamily: {
+    fontFamily: "Cochin",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
 });
+
+// Aria

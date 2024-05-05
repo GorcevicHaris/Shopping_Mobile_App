@@ -76,15 +76,24 @@ export default function Basket() {
       />
       {showBill && (
         <View style={styles.totalContainer}>
-          {sendDataFunction?.map((el) => (
-            <View key={el.id}>
-              <Text style={{ color: "white" }}>
-                Quantity:&nbsp;
-                {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;
-                {el.fakeQuantity}x
-              </Text>
-            </View>
-          ))}
+          {sendDataFunction?.map((el) => {
+            return (
+              <View key={el.id}>
+                <Text style={{ color: "white" }}>
+                  {el.fakeQuantity === undefined ? 1 : el.fakeQuantity} x{" "}
+                  {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  {isNaN(el.price * el.fakeQuantity)
+                    ? el.price
+                    : el.price * el.fakeQuantity}
+                  $
+                </Text>
+              </View>
+            );
+          })}
+
           <Text style={{ color: "white" }}>
             Total Price: {totalPrice.toFixed(2)}$
           </Text>
@@ -176,15 +185,15 @@ const styles = StyleSheet.create({
     color: "white",
     position: "absolute",
     top: 20,
-    left: 65,
     width: 300,
     zIndex: 10,
+    alignSelf: "center",
   },
   closebtn: {
-    marginleft: 15,
     color: "white",
     fontSize: 22,
     lineHeight: 20,
     alignSelf: "center",
+    marginLeft: 10,
   },
 });

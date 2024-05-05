@@ -47,7 +47,8 @@ const BasketData = ({ data, setFakeQuantity, removeProduct }) => {
     </View>
   );
 };
-
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
 const styles = StyleSheet.create({
   container: {
     minHeight: 10,
@@ -58,16 +59,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     gap: 20,
     padding: 20,
-    borderBottomWidth: 10,
-    borderBottomColor: "#2D2926FF",
-    borderRightWidth: 10,
+    borderBottomWidth: 7,
+    borderRightWidth: 7,
     borderRightColor: "#2D2926FF",
     flexDirection: "column",
   },
   image: {
     borderRadius: 25,
     height: 450,
-    width: 350,
+    width: 300,
     objectFit: "cover",
     alignSelf: "center",
   },
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 5,
   },
   button: {
     backgroundColor: "#E94B3CFF",
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   button3: {
-    backgroundColor: "red",
+    backgroundColor: orange,
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 10,
