@@ -27,11 +27,9 @@ export default function Basket() {
   );
 
   const handleRemoveProduct = (dataItem) => {
-    // Find the removed item
     const removedItem = sendDataFunction.find((item) => item.id === dataItem);
     if (!removedItem) return;
 
-    // Calculate the total quantity of the removed item
     const totalRemovedQuantity = sendDataFunction.reduce((total, item) => {
       if (item.id === dataItem) {
         return total + item.fakeQuantity;
@@ -39,12 +37,10 @@ export default function Basket() {
       return total;
     }, 0);
 
-    // Subtract the total price (price * quantity) of the removed item from the total price
     setTotalPrice(
       (prevTotal) => prevTotal - removedItem.price * totalRemovedQuantity
     );
 
-    // Remove all instances of the item from sendDataFunction
     setSendDataFunction((prev) => prev.filter((item) => item.id !== dataItem));
   };
 
@@ -74,7 +70,7 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
-            removeProduct={handleRemoveProduct} // Updated function
+            removeProduct={handleRemoveProduct}
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
                 sendDataFunction.map((data) =>
