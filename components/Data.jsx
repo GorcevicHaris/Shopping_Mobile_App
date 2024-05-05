@@ -30,15 +30,15 @@ export default function Data({ data }) {
     return sendDataFunction.some((cartItem) => cartItem.id === item.id);
   }
 
-  function handleFavorite() {
-    setDataFavorite([data]);
+  function handleFavorite(item) {
+    setDataFavorite((datas) => [...datas, item]);
     console.log(dataFavorite);
   }
   return (
     <View style={styles.container}>
       <View>
         <AntDesign
-          onPress={handleFavorite}
+          onPress={() => handleFavorite(data)}
           name="heart"
           size={29}
           color="#E94B3CFF"
