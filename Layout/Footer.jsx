@@ -16,7 +16,7 @@ function Footer() {
         color="#E94B3CFF"
       />
       <AntDesign
-        onPress={() => navigate.navigate("favorites")}
+        onPress={() => navigate.navigate("Favorites")}
         name="heart"
         size={29}
         color="#E94B3CFF"

@@ -8,7 +8,7 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import axios from "axios";
 // import product from "../Products/Produtcs.json";
@@ -22,11 +22,15 @@ function HomePage() {
     function getData() {
       axios
         .get("http://192.168.0.103:4005/product")
-        .then((res) => setProducts(res.data))
+        .then((res) => {
+          setProducts(res.data);
+          setFilteredProducts(res.data);
+        })
         .catch((err) => console.log(err, "neuspesno"));
     }
     getData();
   }, []);
+
   useEffect(() => {
     console.log(search);
     setFilteredProducts(
@@ -35,7 +39,8 @@ function HomePage() {
       )
     );
   }, [search]);
-  console.log(products, "dsfoi");
+  console.log(products, "dsfss");
+
   return (
     <View style={styles.container1}>
       <StatusBar />
@@ -50,13 +55,17 @@ function HomePage() {
           />
         </View>
 
-        <FlatList
-          numColumns={windowWidth > 700 ? 2 : 1}
-          data={filteredProducts ? filteredProducts : ""}
-          renderItem={({ item }) => <Data key={item.id} data={item} />}
-          keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
-        />
+        {products.length > 0 ? (
+          <FlatList
+            numColumns={windowWidth > 700 ? 2 : 1}
+            data={products ? filteredProducts : ""}
+            renderItem={({ item }) => <Data key={item.id} data={item} />}
+            keyExtractor={(item) => item.id.toString()}
+            ItemSeparatorComponent={() => <View style={{ height: 30 }} />}
+          />
+        ) : (
+          console.log("nema nista")
+        )}
       </View>
     </View>
   );

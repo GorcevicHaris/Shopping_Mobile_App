@@ -9,9 +9,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function Data({ data }) {
-  const { setSendDataFunction, sendDataFunction } = useContext(CustomContext);
+  const {
+    setSendDataFunction,
+    sendDataFunction,
+    dataFavorite,
+    setDataFavorite,
+  } = useContext(CustomContext);
   function handleBuy(item) {
     if (alreadyInCart(item)) {
       alert("vec dodat");
@@ -19,13 +25,25 @@ export default function Data({ data }) {
       setSendDataFunction((data) => [...data, item]);
     }
   }
-
+  console.log();
   function alreadyInCart(item) {
     return sendDataFunction.some((cartItem) => cartItem.id === item.id);
   }
 
+  function handleFavorite() {
+    setDataFavorite(data);
+    console.log(dataFavorite);
+  }
   return (
     <View style={styles.container}>
+      <View>
+        <AntDesign
+          onPress={handleFavorite}
+          name="heart"
+          size={29}
+          color="#E94B3CFF"
+        />
+      </View>
       <Text style={styles.textFamily}>{data.title}</Text>
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
@@ -79,8 +97,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textFamily: {
-    fontFamily: "Cochin",
-    fontWeight: "bold",
+    fontFamily: "Georgia",
+    fontWeight: "400",
     fontSize: 15,
   },
 });

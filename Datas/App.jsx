@@ -12,7 +12,7 @@ import ContextProvider from "../Context/ContextProvider";
 
 const Stack = createNativeStackNavigator();
 
-const MyStack = () => {
+const MyStack = ({ productsData }) => {
   return (
     <ContextProvider>
       <NavigationContainer>
@@ -24,9 +24,9 @@ const MyStack = () => {
               </Layout>
             )}
           </Stack.Screen>
-          <Stack.Screen name="favorites" component={Favorites} />
-          <Stack.Screen name="basket" component={Basket} />
-          <Stack.Screen name="profile" component={Profile} />
+          <Stack.Screen name="Favorites" component={Favorites} />
+          <Stack.Screen name="Basket" component={Basket} />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>

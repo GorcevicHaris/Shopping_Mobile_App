@@ -29,11 +29,16 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     fontWeight: "bold",
-    letterSpacing: 5,
-    fontWeight: "900",
+    fontFamily: "Georgia",
+    letterSpacing: 15,
     color: orange,
     textTransform: "uppercase",
   },
 });
 
 export default Header;
+// Arial
+// Helvetica
+// Times New Roman
+// Georgia
+// Courier New

@@ -14,6 +14,7 @@ export default function Basket() {
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+
   useEffect(() => {
     setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   }, []);
@@ -53,9 +54,9 @@ export default function Basket() {
         renderItem={({ item }) => (
           <BasketData
             removeProduct={(dataItem) =>
-              setSendDataFunction((prev) =>
-                prev.filter((item) => item.id !== dataItem)
-              )
+              setSendDataFunction((prev) => {
+                prev.filter((item) => item.id !== dataItem);
+              })
             }
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
@@ -80,7 +81,7 @@ export default function Basket() {
             return (
               <View key={el.id}>
                 <Text style={{ color: "white" }}>
-                  {el.fakeQuantity === undefined ? 1 : el.fakeQuantity} x{" "}
+                  {el.fakeQuantity === undefined ? 1 : el.fakeQuantity} x&nbsp;
                   {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -147,12 +148,12 @@ const styles = StyleSheet.create({
   totalContainer: {
     width: 300,
     minHeight: 500,
-    position: "absolute",
-    top: 130,
-    left: 75,
+    alignSelf: "center",
     backgroundColor: siva,
     borderRadius: 20,
     padding: 20,
+    position: "absolute",
+    top: 100,
   },
   separator: {
     height: 50,
@@ -183,8 +184,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "lightgreen",
     color: "white",
-    position: "absolute",
-    top: 20,
     width: 300,
     zIndex: 10,
     alignSelf: "center",
