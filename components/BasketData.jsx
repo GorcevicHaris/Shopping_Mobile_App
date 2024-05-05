@@ -27,7 +27,10 @@ const BasketData = ({ data, setFakeQuantity, removeProduct }) => {
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <TouchableOpacity
-          onPress={() => removeProduct(data.id)}
+          onPress={() => {
+            removeProduct(data.id);
+            setTotalPrice(totalPrice - data.price * quantity);
+          }}
           style={styles.button3}
         >
           <Text style={styles.buttonText}>Remove</Text>

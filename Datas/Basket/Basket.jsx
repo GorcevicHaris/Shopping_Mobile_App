@@ -26,24 +26,6 @@ export default function Basket() {
     </View>
   );
 
-  const handleRemoveProduct = (dataItem) => {
-    const removedItem = sendDataFunction.find((item) => item.id === dataItem);
-    if (!removedItem) return;
-
-    const totalRemovedQuantity = sendDataFunction.reduce((total, item) => {
-      if (item.id === dataItem) {
-        return total + item.fakeQuantity;
-      }
-      return total;
-    }, 0);
-
-    setTotalPrice(
-      (prevTotal) => prevTotal - removedItem.price * totalRemovedQuantity
-    );
-
-    setSendDataFunction((prev) => prev.filter((item) => item.id !== dataItem));
-  };
-
   const handlePay = () => {
     setShowBill(false);
     setShowAlert(true);
@@ -70,7 +52,11 @@ export default function Basket() {
         data={sendDataFunction}
         renderItem={({ item }) => (
           <BasketData
-            removeProduct={handleRemoveProduct}
+            removeProduct={(dataItem) =>
+              setSendDataFunction((prev) =>
+                prev.filter((item) => item.id !== dataItem)
+              )
+            }
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
                 sendDataFunction.map((data) =>
@@ -86,11 +72,11 @@ export default function Basket() {
         )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        ListFooterComponent={renderFooter}
+        ListFooterComponent={renderFooter(sendDataFunction, totalPrice)}
       />
       {showBill && (
         <View style={styles.totalContainer}>
-          {sendDataFunction.map((el) => (
+          {sendDataFunction?.map((el) => (
             <View key={el.id}>
               <Text style={{ color: "white" }}>
                 Quantity:&nbsp;

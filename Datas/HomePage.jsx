@@ -11,30 +11,31 @@ import {
 import { Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import axios from "axios";
+import product from "../Products/Produtcs.json";
 function HomePage() {
   const [search, setSearch] = useState("");
   const [search2, setSearch2] = useState("");
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    function getData() {
-      axios
-        .get("http://192.168.0.103:4005/product")
-        .then((res) => setProducts(res.data))
-        .catch((err) => console.log(err, "neuspesno"));
-    }
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   function getData() {
+  //     axios
+  //       .get("http://192.168.0.103:4005/product")
+  //       .then((res) => setProducts(res.data))
+  //       .catch((err) => console.log(err, "neuspesno"));
+  //   }
+  //   getData();
+  // }, []);
   useEffect(() => {
     console.log(search);
     setFilteredProducts(
-      products.filter((data) =>
+      product.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())
       )
     );
   }, [search]);
-  console.log(products, "df", "sfssdfdsSSd");
+  console.log("df");
   return (
     <View style={styles.container1}>
       <StatusBar />
