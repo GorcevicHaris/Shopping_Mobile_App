@@ -9,7 +9,10 @@ export default function Favorites() {
   console.log(dataFavorite, "datafavorites");
   return (
     <View style={styles.container}>
-      <Text>{dataFavorite.price}</Text>
+      <FlatList
+        data={dataFavorite ? dataFavorite : ""}
+        renderItem={({ item }) => <DataFavorites key={item.id} data={item} />}
+      />
     </View>
   );
 }

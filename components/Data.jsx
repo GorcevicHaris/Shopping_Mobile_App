@@ -31,7 +31,7 @@ export default function Data({ data }) {
   }
 
   function handleFavorite() {
-    setDataFavorite(data);
+    setDataFavorite([data]);
     console.log(dataFavorite);
   }
   return (
