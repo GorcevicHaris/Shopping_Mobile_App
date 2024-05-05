@@ -25,14 +25,19 @@ export default function Data({ data }) {
       setSendDataFunction((data) => [...data, item]);
     }
   }
-  console.log();
   function alreadyInCart(item) {
     return sendDataFunction.some((cartItem) => cartItem.id === item.id);
   }
 
   function handleFavorite(item) {
-    setDataFavorite((datas) => [...datas, item]);
-    console.log(dataFavorite);
+    if (inCart(item)) {
+      alert("Already Added");
+    } else {
+      setDataFavorite((datas) => [...datas, item]);
+    }
+  }
+  function inCart(item) {
+    return dataFavorite.some((datas) => datas.id === item.id);
   }
   return (
     <View style={styles.container}>
