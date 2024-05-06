@@ -1,15 +1,23 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
-
-function Login() {
+import axios from "axios";
+function Login({ navigation }) {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
   console.log(values);
-  const navigate = useNavigation();
 
+  function handleSubmit() {
+    axios
+      .post(`http://192.168.0.103:4005/Login`, values)
+      .then((res) => {
+        console.log(res, "Prošlo");
+        navigation.navigate("Profile");
+      })
+      .catch((err) => console.log(err, "Greska"));
+  }
   return (
     <View style={styles.container}>
       <TextInput
@@ -26,7 +34,11 @@ function Login() {
         value={values.password}
         secureTextEntry={true}
       />
-      <Button title="Registruj se" />
+      <Button
+        title="Registruj se"
+        onPress={() => navigation.navigate("Register")}
+      />
+      <Button title="Login" onPress={handleSubmit} />
     </View>
   );
 }

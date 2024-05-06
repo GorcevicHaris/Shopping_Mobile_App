@@ -2,19 +2,22 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import axios from "axios";
-function Register() {
+function Register({ navigation }) {
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
   });
   console.log(values);
-  const navigate = useNavigation();
-  useEffect(() => {
-    function getData() {
-      axios;
-    }
-  }, []);
+  function handleSubmit() {
+    axios
+      .post(`http://192.168.0.103:4005/Register`, values)
+      .then((res) => {
+        console.log(res, "Prošlo");
+        navigation.navigate("Login");
+      })
+      .catch((err) => console.log(err, "Greska"));
+  }
 
   return (
     <View style={styles.container}>
@@ -38,8 +41,8 @@ function Register() {
         value={values.password}
         secureTextEntry={true}
       />
-      <Button title="Registruj se" />
-      <Button title="Idi login" onPress={() => navigate.navigate("Login")} />
+      <Button title="Registruj se" onPress={handleSubmit} />
+      <Button title="Idi login" />
     </View>
   );
 }
