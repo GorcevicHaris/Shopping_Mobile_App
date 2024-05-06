@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
-
+import axios from "axios";
 function Register() {
-  const [values, setvalues] = useState({
+  const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
   });
   console.log(values);
+  const navigate = useNavigation();
+  useEffect(() => {
+    function getData() {
+      axios;
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <TextInput
-        onChangeText={(text) => setvalues("name", text)}
+        onChangeText={(text) => setValues({ ...values, name: text })}
         style={styles.input}
         placeholder="Ime"
         value={values.name}
@@ -20,17 +28,18 @@ function Register() {
         style={styles.input}
         placeholder="Email"
         value={values.email}
-        onChangeText={(text) => setvalues("email", text)}
+        onChangeText={(text) => setValues({ ...values, email: text })}
         keyboardType="email-address"
       />
       <TextInput
-        onChangeText={(text) => setvalues("password", text)}
+        onChangeText={(text) => setValues({ ...values, password: text })}
         style={styles.input}
         placeholder="Lozinka"
         value={values.password}
         secureTextEntry={true}
       />
-      <Button title="Registruj se" onPress={handleRegister} />
+      <Button title="Registruj se" />
+      <Button title="Idi login" onPress={() => navigate.navigate("Login")} />
     </View>
   );
 }

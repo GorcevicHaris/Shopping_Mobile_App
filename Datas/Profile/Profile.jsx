@@ -1,15 +1,36 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-function Profile({ navigate }) {
+function Profile({ navigation }) {
   function goToRegister() {
-    navigate.navigate("Register");
+    navigation.navigate("Register");
+  }
+  function goToLogin() {
+    navigation.navigate("Login");
   }
   return (
-    <View>
-      <Text children="children" />
+    <View style={style.container}>
+      <TouchableOpacity onPress={goToRegister} style={style.button}>
+        <Text>Go to Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={goToLogin} style={style.button}>
+        <Text>Go to Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  button: {
+    backgroundColor: "orange",
+    height: 50,
+    width: 120,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "flex-end",
+  },
+});
 export default Profile;
