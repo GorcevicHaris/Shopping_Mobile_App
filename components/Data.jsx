@@ -18,6 +18,7 @@ export default function Data({ data }) {
     dataFavorite,
     setDataFavorite,
   } = useContext(CustomContext);
+
   function handleBuy(item) {
     if (alreadyInCart(item)) {
       alert("vec dodat");
@@ -31,7 +32,7 @@ export default function Data({ data }) {
 
   function handleFavorite(item) {
     if (inCart(item)) {
-      alert("Already Added");
+      alert("Already Adde");
     } else {
       setDataFavorite((datas) => [...datas, item]);
     }
@@ -41,15 +42,13 @@ export default function Data({ data }) {
   }
   return (
     <View style={styles.container}>
-      <View>
-        <AntDesign
-          onPress={() => handleFavorite(data)}
-          name="heart"
-          size={29}
-          color="#E94B3CFF"
-        />
-      </View>
-      <Text style={styles.textFamily}>{data.title}</Text>
+      <AntDesign
+        style={styles.icon}
+        onPress={() => handleFavorite(data)}
+        name="heart"
+        size={29}
+        color="#E94B3CFF"
+      />
       <Image style={styles.image} source={{ uri: data.imageURL }} />
       <View style={styles.buyinfo}>
         <Text>{data.price}$</Text>
@@ -88,6 +87,7 @@ const styles = StyleSheet.create({
     width: windowWidth > 400 ? 350 : 300,
     objectFit: "cover",
     alignSelf: "center",
+    zIndex: 0,
   },
   buyinfo: {
     flexDirection: "row",
@@ -105,6 +105,10 @@ const styles = StyleSheet.create({
     fontFamily: "Georgia",
     fontWeight: "400",
     fontSize: 15,
+  },
+  icon: {
+    zIndex: 2,
+    alignSelf: "flex-end",
   },
 });
 

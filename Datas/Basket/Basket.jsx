@@ -16,7 +16,10 @@ export default function Basket() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
+    setTotalPrice(
+      sendDataFunction &&
+        sendDataFunction.reduce((acc, curr) => acc + curr.price, 0)
+    );
   }, []);
 
   const renderFooter = () => (
@@ -55,7 +58,7 @@ export default function Basket() {
           <BasketData
             removeProduct={(dataItem) =>
               setSendDataFunction((prev) => {
-                prev.filter((item) => item.id !== dataItem);
+                return prev.filter((item) => item.id !== dataItem);
               })
             }
             setFakeQuantity={(quantity) =>

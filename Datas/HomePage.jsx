@@ -39,7 +39,7 @@ function HomePage() {
       )
     );
   }, [search]);
-  console.log(products, "dsfss");
+  console.log(products, "dsfs");
 
   return (
     <View style={styles.container1}>

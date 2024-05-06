@@ -5,7 +5,7 @@ function DataFavorites({ data }) {
   console.log(data, "data");
   return (
     <View style={styles.container}>
-      <Text>{data.title}</Text>
+      {/* <Text>{data.title}</Text> */}
       <Image style={styles.image} source={{ uri: data.imageURL }} />
     </View>
   );
@@ -14,7 +14,6 @@ const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "pink",
   },
   image: {
     objectFit: "contain",
@@ -23,6 +22,7 @@ const styles = StyleSheet.create({
     width: windowWidth > 400 ? 350 : 300,
     objectFit: "cover",
     alignSelf: "center",
+    borderWidth: 20,
   },
 });
 export default DataFavorites;

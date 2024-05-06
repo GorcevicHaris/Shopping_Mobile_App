@@ -22,14 +22,14 @@ function Footer() {
         color="#E94B3CFF"
       />
       <FontAwesome5
-        onPress={() => navigate.navigate("basket")}
+        onPress={() => navigate.navigate("Basket")}
         name="shopping-bag"
         size={29}
         color="#E94B3CFF"
       />
       <FontAwesome name="search" size={29} color="#E94B3CFF" />
       <MaterialIcons
-        onPress={() => navigate.navigate("profile")}
+        onPress={() => navigate.navigate("Profile")}
         name="manage-accounts"
         size={size}
         color="#E94B3CFF"
@@ -37,6 +37,7 @@ function Footer() {
     </View>
   );
 }
+
 const size = 37;
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";

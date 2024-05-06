@@ -20,6 +20,6 @@ export default function Favorites() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
+    paddingTop: 20,
   },
 });
