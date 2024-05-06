@@ -13,8 +13,12 @@ function Login({ navigation }) {
     axios
       .post(`http://192.168.0.103:4005/Login`, values)
       .then((res) => {
-        console.log(res, "Prošlo");
-        navigation.navigate("Profile");
+        if (res.data.Status === "Success") {
+          navigation.navigate("Profile");
+          console.log(res.data.Status);
+        } else {
+          console.log(res.data.Message);
+        }
       })
       .catch((err) => console.log(err, "Greska"));
   }
