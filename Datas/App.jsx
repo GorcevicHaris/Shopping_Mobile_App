@@ -19,6 +19,7 @@ const MyStack = ({ productsData }) => {
     <ContextProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Home" options={{ headerShown: false }}>
             {() => (
               <Layout>
@@ -30,7 +31,6 @@ const MyStack = ({ productsData }) => {
           <Stack.Screen name="Basket" component={Basket} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>

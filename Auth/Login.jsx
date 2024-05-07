@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import axios from "axios";
@@ -13,9 +12,8 @@ function Login({ navigation }) {
       .post(`http://192.168.0.103:4005/Login`, values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigation.navigate("Profile");
-          console.log(res.data.Status);
-          console.log(res.data);
+          navigation.navigate("Profile", { userName: res.data.userData.name });
+          console.log(res.data.userData.name, "name");
         } else {
           console.log(res.data.Message);
         }

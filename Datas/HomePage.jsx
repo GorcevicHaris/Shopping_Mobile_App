@@ -7,17 +7,19 @@ import {
   Text,
   Dimensions,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import axios from "axios";
 // import product from "../Products/Produtcs.json";
-function HomePage() {
+function HomePage({ navigation }) {
   const [search, setSearch] = useState("");
   const [search2, setSearch2] = useState("");
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     function getData() {
       axios
@@ -41,8 +43,15 @@ function HomePage() {
   }, [search]);
   console.log(products, "dsfs");
 
+  function goToLogin() {
+    navigation.navigate("Login");
+  }
+
   return (
     <View style={styles.container1}>
+      <TouchableOpacity onPress={goToLogin}>
+        <Text>Go to Login</Text>
+      </TouchableOpacity>
       <StatusBar />
       <View style={{ flexDirection: "column", gap: 30 }}>
         <View style={{ flexDirection: "row" }}>

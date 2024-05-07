@@ -18,7 +18,9 @@ function Register({ navigation }) {
       })
       .catch((err) => console.log(err, "Greska"));
   }
-
+  function goLogin() {
+    navigation.navigate("Login");
+  }
   return (
     <View style={styles.container}>
       <TextInput
@@ -42,7 +44,7 @@ function Register({ navigation }) {
         secureTextEntry={true}
       />
       <Button title="Registruj se" onPress={handleSubmit} />
-      <Button title="Idi login" />
+      <Button title="Idi login" onPress={goLogin} />
     </View>
   );
 }
