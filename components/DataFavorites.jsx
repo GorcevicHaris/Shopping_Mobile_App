@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     width: windowWidth > 400 ? 350 : 300,
     objectFit: "cover",
     alignSelf: "center",
-    borderWidth: 20,
+    borderWidth: 7,
+    borderColor: "lightgreen",
   },
 });
 export default DataFavorites;

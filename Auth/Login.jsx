@@ -7,7 +7,6 @@ function Login({ navigation }) {
     email: "",
     password: "",
   });
-  console.log(values);
 
   function handleSubmit() {
     axios
@@ -16,6 +15,7 @@ function Login({ navigation }) {
         if (res.data.Status === "Success") {
           navigation.navigate("Profile");
           console.log(res.data.Status);
+          console.log(res.data);
         } else {
           console.log(res.data.Message);
         }
