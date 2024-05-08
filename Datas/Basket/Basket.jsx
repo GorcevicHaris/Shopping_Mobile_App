@@ -16,10 +16,7 @@ export default function Basket() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    setTotalPrice(
-      sendDataFunction &&
-        sendDataFunction.reduce((acc, curr) => acc + curr.price, 0)
-    );
+    setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   }, []);
 
   const renderFooter = () => (

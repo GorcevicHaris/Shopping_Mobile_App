@@ -23,7 +23,7 @@ export default function Data({ data }) {
     if (alreadyInCart(item)) {
       alert("vec dodat");
     } else {
-      setSendDataFunction((data) => [...data, item]);
+      setSendDataFunction((datas) => [...datas, item]);
     }
   }
   function alreadyInCart(item) {
@@ -111,5 +111,3 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
 });
-
-// Aria

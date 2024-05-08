@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  MaterialIcons,
+  FontAwesome5,
+  FontAwesome,
+} from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 function Footer() {
   const navigate = useNavigation();
@@ -11,7 +13,7 @@ function Footer() {
     <View style={styles.footer}>
       <FontAwesome
         onPress={() => navigate.navigate("Home")}
-        name="home"
+        name="homesdfsdf"
         size={size}
         color="#E94B3CFF"
       />
@@ -27,7 +29,6 @@ function Footer() {
         size={29}
         color="#E94B3CFF"
       />
-      <FontAwesome name="search" size={29} color="#E94B3CFF" />
       <MaterialIcons
         onPress={() => navigate.navigate("Profile")}
         name="manage-accounts"

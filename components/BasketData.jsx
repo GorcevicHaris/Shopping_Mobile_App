@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 
-const BasketData = ({ data, setFakeQuantity, removeProduct }) => {
+export default function BasketData({ data, setFakeQuantity, removeProduct }) {
   const [quantity, setQuantity] = useState(1);
   const { totalPrice, setTotalPrice } = useContext(CustomContext);
 
@@ -46,7 +46,7 @@ const BasketData = ({ data, setFakeQuantity, removeProduct }) => {
       </View>
     </View>
   );
-};
+}
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
 const styles = StyleSheet.create({
@@ -99,5 +99,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-
-export default BasketData;
