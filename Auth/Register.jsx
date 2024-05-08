@@ -41,7 +41,6 @@ function Register({ navigation }) {
         style={styles.input}
         placeholder="Lozinka"
         value={values.password}
-        secureTextEntry={true}
       />
       <Button title="Registruj se" onPress={handleSubmit} />
       <Button title="Idi login" onPress={goLogin} />
