@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
-export default function Basket() {
+export default function Basket({ children }) {
   const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
@@ -123,6 +123,7 @@ export default function Basket() {
           </TouchableOpacity>
         </View>
       )}
+      {children}
     </View>
   );
 }

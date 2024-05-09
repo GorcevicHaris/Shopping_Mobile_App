@@ -1,6 +1,5 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import {
   FontAwesome,
   AntDesign,
@@ -16,10 +15,12 @@ import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import ContextProvider from "../Context/ContextProvider";
 import { StyleSheet, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack"; // Add this import
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator;
+const Stack = createNativeStackNavigator();
 
 const ProfileStack = () => {
   return (
@@ -31,31 +32,32 @@ const ProfileStack = () => {
   );
 };
 
-const MyStack = () => {
+export default function MyStack() {
   return (
     <ContextProvider>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
-              let iconName;
               if (route.name === "Home") {
-                iconName = "home";
-                return (
-                  <FontAwesome name={iconName} size={size} color={color} />
-                );
+                return <FontAwesome name={"home"} size={size} color={color} />;
               } else if (route.name === "Favorites") {
-                iconName = "heart";
-                return <AntDesign name={iconName} size={size} color={color} />;
+                return <AntDesign name={"heart"} size={size} color={color} />;
               } else if (route.name === "Basket") {
-                iconName = "shopping-bag";
                 return (
-                  <FontAwesome5 name={iconName} size={size} color={color} />
+                  <FontAwesome5
+                    name={"shopping-bag"}
+                    size={size}
+                    color={color}
+                  />
                 );
               } else if (route.name === "Profile") {
-                iconName = "manage-accounts";
                 return (
-                  <MaterialIcons name={iconName} size={size} color={color} />
+                  <MaterialIcons
+                    name={"manage-accounts"}
+                    size={size}
+                    color={color}
+                  />
                 );
               }
               return <FontAwesome name="circle" size={size} color={color} />;
@@ -70,26 +72,8 @@ const MyStack = () => {
       </NavigationContainer>
     </ContextProvider>
   );
-};
+}
 
 const size = 37;
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
-
-const styles = StyleSheet.create({
-  footer: {
-    height: 90,
-    backgroundColor: siva,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  footerText: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  icons: {},
-});
-
-export default MyStack;

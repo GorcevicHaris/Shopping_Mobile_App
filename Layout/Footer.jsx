@@ -6,17 +6,13 @@ import {
   FontAwesome5,
   FontAwesome,
 } from "@expo/vector-icons";
+
 import { useNavigation } from "@react-navigation/native";
 function Footer() {
   const navigate = useNavigation();
   return (
     <View style={styles.footer}>
-      <FontAwesome
-        onPress={() => navigate.navigate("Home")}
-        name="homesdfsdf"
-        size={size}
-        color="#E94B3CFF"
-      />
+      <FontAwesome5 name="home" size={24} color="#E94B3CFF" />
       <AntDesign
         onPress={() => navigate.navigate("Favorites")}
         name="heart"
