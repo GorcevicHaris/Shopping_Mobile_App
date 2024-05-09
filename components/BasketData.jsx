@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 
@@ -10,7 +10,9 @@ export default function BasketData({ data, setFakeQuantity, removeProduct }) {
     if (quantity < 10) {
       setQuantity(quantity + 1);
       setFakeQuantity(quantity + 1);
-      setTotalPrice(totalPrice + data.price);
+      setTotalPrice((prev) => prev + data.price);
+      console.log(totalPrice, "samoTotalprice");
+      console.log(totalPrice + data.price, "totalna cena + cena");
     }
   };
 
@@ -19,6 +21,7 @@ export default function BasketData({ data, setFakeQuantity, removeProduct }) {
       setQuantity(quantity - 1);
       setFakeQuantity(quantity - 1);
       setTotalPrice(totalPrice - data.price);
+      console.log(totalPrice - data.price, "totalna cena + cena");
     }
   };
 

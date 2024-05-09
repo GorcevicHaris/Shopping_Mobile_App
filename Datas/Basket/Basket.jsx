@@ -17,7 +17,7 @@ export default function Basket() {
 
   // useEffect(() => {
   //   setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
-  // }, []);
+  // }, [totalPrice, sendDataFunction]);
 
   const renderFooter = () => (
     <View>
@@ -94,7 +94,6 @@ export default function Basket() {
               </View>
             );
           })}
-
           <Text style={{ color: "white" }}>
             Total Price: {totalPrice.toFixed(2)}$
           </Text>

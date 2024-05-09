@@ -17,6 +17,8 @@ export default function Data({ data }) {
     sendDataFunction,
     dataFavorite,
     setDataFavorite,
+    totalPrice,
+    setTotalPrice,
   } = useContext(CustomContext);
 
   function handleBuy(item) {
@@ -24,6 +26,7 @@ export default function Data({ data }) {
       alert("vec dodat");
     } else {
       setSendDataFunction((datas) => [...datas, item]);
+      setTotalPrice((prev) => prev + item.price);
     }
   }
   function alreadyInCart(item) {
