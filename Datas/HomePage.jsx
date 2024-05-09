@@ -32,7 +32,6 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    console.log(search);
     setFilteredProducts(
       products.filter((data) =>
         data.title.toLowerCase().includes(search.toLowerCase())

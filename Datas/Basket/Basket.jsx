@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
-export default function Basket({ children }) {
+export default function Basket() {
   const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  useEffect(() => {
-    setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
-  }, []);
+  // useEffect(() => {
+  //   setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
+  // }, []);
 
   const renderFooter = () => (
     <View>
@@ -123,7 +123,6 @@ export default function Basket({ children }) {
           </TouchableOpacity>
         </View>
       )}
-      {children}
     </View>
   );
 }
