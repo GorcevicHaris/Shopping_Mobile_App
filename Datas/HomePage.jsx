@@ -12,10 +12,8 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import axios from "axios";
 // import product from "../Products/Produtcs.json";
-import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-elements";
 
-function HomePage({ navigation }) {
+function HomePage() {
   const [search, setSearch] = useState("");
 
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -45,11 +43,6 @@ function HomePage({ navigation }) {
   return (
     <View style={styles.container1}>
       <StatusBar />
-      <Button
-        title="Go to Basket"
-        onPress={() => navigation.navigate("BasketStack")}
-      />
-
       <View style={{ flexDirection: "column", gap: 30 }}>
         <View style={{ flexDirection: "row" }}>
           <TextInput

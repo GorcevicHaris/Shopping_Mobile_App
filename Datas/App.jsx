@@ -25,11 +25,67 @@ export default function TabNavigator() {
   return (
     <ContextProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="HomeStack" component={HomeStack} />
-          <Tab.Screen name="FavoritesStack" component={FavoriteStack} />
-          <Tab.Screen name="BasketStack" component={BasketStack} />
-          <Tab.Screen name="ProfileStack" component={ProfileStack} />
+        <Tab.Navigator
+          screenOptions={() => ({
+            tabBarStyle: {},
+            tabBarLabelStyle: { fontSize: 12 },
+            tabBarActiveTintColor: "#E94B3CFF",
+            tabBarInactiveTintColor: "red",
+          })}
+        >
+          <Tab.Screen
+            name="HomeStack"
+            component={HomeStack}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <FontAwesome name="home" color="#E94B3CFF" size={size + 5} />
+              ),
+              headerShown: false,
+              tabBarLabel: "",
+            }}
+          />
+
+          <Tab.Screen
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <FontAwesome name="heart" color="#E94B3CFF" size={size} />
+              ),
+              headerShown: false,
+              tabBarLabel: "",
+            }}
+            name="FavoritesStack"
+            component={FavoriteStack}
+          />
+          <Tab.Screen
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <FontAwesome
+                  name="shopping-bag"
+                  color="#E94B3CFF"
+                  size={size}
+                />
+              ),
+              headerShown: false,
+              tabBarLabel: "",
+            }}
+            name="BasketStack"
+            component={BasketStack}
+          />
+          <Tab.Screen
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialIcons
+                  name="manage-accounts"
+                  color="#E94B3CFF"
+                  size={size + 10}
+                />
+              ),
+              headerShown: false,
+              tabBarLabel: "",
+            }}
+            name="ProfileStack"
+            component={ProfileStack}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </ContextProvider>
@@ -69,3 +125,17 @@ function HomeStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
+  },
+  tabLabel: {
+    fontSize: 12,
+  },
+});
+
+const orange = "#E94B3CFF";
+const siva = "#2D2926FF";
