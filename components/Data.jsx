@@ -17,7 +17,6 @@ export default function Data({ data }) {
     sendDataFunction,
     dataFavorite,
     setDataFavorite,
-    totalPrice,
     setTotalPrice,
   } = useContext(CustomContext);
 
@@ -30,12 +29,12 @@ export default function Data({ data }) {
     }
   }
   function alreadyInCart(item) {
-    return sendDataFunction.some((cartItem) => cartItem.id === item.id);
+    return sendDataFunction.some((datas) => datas.id === item.id);
   }
 
   function handleFavorite(item) {
     if (inCart(item)) {
-      alert("Already Adde");
+      alert("Already Added");
     } else {
       setDataFavorite((datas) => [...datas, item]);
     }
