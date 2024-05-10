@@ -12,7 +12,6 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import Data from "../components/Data";
 import axios from "axios";
 // import product from "../Products/Produtcs.json";
-
 function HomePage() {
   const [search, setSearch] = useState("");
 

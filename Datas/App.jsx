@@ -5,6 +5,7 @@ import {
   AntDesign,
   FontAwesome5,
   MaterialIcons,
+  Zocial,
 } from "@expo/vector-icons";
 import HomePage from "./HomePage";
 import Layout from "../Layout/Layout";
@@ -27,7 +28,12 @@ export default function TabNavigator() {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={() => ({
-            tabBarStyle: {},
+            tabBarStyle: {
+              height: 80,
+              backgroundColor: siva,
+              justifyContent: "center",
+              alignItems: "center",
+            },
             tabBarLabelStyle: { fontSize: 12 },
             tabBarActiveTintColor: "#E94B3CFF",
             tabBarInactiveTintColor: "red",
@@ -38,7 +44,12 @@ export default function TabNavigator() {
             component={HomeStack}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FontAwesome name="home" color="#E94B3CFF" size={size + 5} />
+                <FontAwesome
+                  style={{ position: "absolute", top: 15 }}
+                  name="home"
+                  color="#E94B3CFF"
+                  size={33}
+                />
               ),
               headerShown: false,
               tabBarLabel: "",
@@ -48,7 +59,12 @@ export default function TabNavigator() {
           <Tab.Screen
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FontAwesome name="heart" color="#E94B3CFF" size={size} />
+                <FontAwesome
+                  style={{ position: "absolute", top: 15 }}
+                  name="heart"
+                  color="#E94B3CFF"
+                  size={28}
+                />
               ),
               headerShown: false,
               tabBarLabel: "",
@@ -60,9 +76,10 @@ export default function TabNavigator() {
             options={{
               tabBarIcon: ({ color, size }) => (
                 <FontAwesome
+                  style={{ position: "absolute", top: 15 }}
                   name="shopping-bag"
                   color="#E94B3CFF"
-                  size={size}
+                  size={27}
                 />
               ),
               headerShown: false,
@@ -75,9 +92,10 @@ export default function TabNavigator() {
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons
+                  style={{ position: "absolute", top: 10 }}
                   name="manage-accounts"
                   color="#E94B3CFF"
-                  size={size + 10}
+                  size={38}
                 />
               ),
               headerShown: false,
@@ -120,8 +138,18 @@ function ProfileStack() {
 
 function HomeStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomePage} />
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: orange,
+        headerStyle: { backgroundColor: siva },
+        headerTitleStyle: { fontSize: 25 },
+      }}
+    >
+      <Stack.Screen
+        options={{ title: "H A R I N G A N" }}
+        name="Home"
+        component={HomePage}
+      />
     </Stack.Navigator>
   );
 }
