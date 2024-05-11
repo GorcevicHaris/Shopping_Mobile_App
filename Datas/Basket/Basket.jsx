@@ -9,12 +9,35 @@ import {
 } from "react-native";
 import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
+import axios from "axios";
 export default function Basket() {
   const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [tokenValues, setTokenValue] = useState("");
 
+  const token = async () => {
+    return await AsyncStorage.getItem("userToken");
+  };
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await token();
+      setTokenValue(token);
+      console.log(tokenValues, "cokse");
+    };
+    fetchToken();
+  }, [token]);
+  console.log(tokenValues, "valuetoken");
+  useEffect(() => {
+    axios
+      .get("http://192.168.0.103:4005/api/fetchOrders", {
+        headers: { Authorization: `Bearer ${tokenValues}` },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, [tokenValues]);
   // useEffect(() => {
   //   setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   // }, [totalPrice, sendDataFunction]);
@@ -50,7 +73,7 @@ export default function Basket() {
       )}
       <FlatList
         numColumns={windowWidth > 700 ? 2 : 1}
-        data={sendDataFunction}
+        data={orders.length > 0 && orders}
         renderItem={({ item }) => (
           <BasketData
             removeProduct={(dataItem) =>
@@ -60,7 +83,7 @@ export default function Basket() {
             }
             setFakeQuantity={(quantity) =>
               setSendDataFunction(
-                sendDataFunction.map((data) =>
+                orders.map((data) =>
                   data.id === item.id
                     ? { ...data, fakeQuantity: quantity }
                     : data
@@ -73,11 +96,11 @@ export default function Basket() {
         )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        ListFooterComponent={renderFooter(sendDataFunction, totalPrice)}
+        ListFooterComponent={renderFooter(orders, totalPrice)}
       />
       {showBill && (
         <View style={styles.totalContainer}>
-          {sendDataFunction?.map((el) => {
+          {orders?.map((el) => {
             return (
               <View key={el.id}>
                 <Text style={{ color: "white" }}>

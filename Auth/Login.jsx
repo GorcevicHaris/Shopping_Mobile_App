@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 function Login({ navigation }) {
   const [values, setValues] = useState({
     email: "",
@@ -12,8 +13,9 @@ function Login({ navigation }) {
       .post(`http://192.168.0.103:4005/Login`, values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigation.navigate("Profile", { userName: res.data.userData.name });
-          console.log(res.data.userData.name, "name");
+          navigation.navigate("Profile");
+          AsyncStorage.setItem("userToken", res.data.token);
+          console.log(res.data.token, "token");
         } else {
           console.log(res.data.Message);
         }

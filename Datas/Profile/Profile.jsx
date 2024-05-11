@@ -2,21 +2,39 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
-
+import { jwtDecode } from "jwt-decode";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 function Profile({ route, navigation }) {
   const [auth, setAuth] = useState(false);
-  const { userName } = route.params;
+  const [userName, setUserName] = useState("");
+  const [tokenValue, setTokenValue] = useState("");
+  const token = async () => {
+    return await AsyncStorage.getItem("userToken");
+  };
+  useEffect(() => {
+    const fetchToken = async () => {
+      const tokenValue = await token();
+      console.log(tokenValue, "kurac");
+      setTokenValue(tokenValue);
+    };
+    fetchToken();
+  }, [token]);
+
+  useEffect(() => {
+    if (tokenValue) {
+      setUserName(jwtDecode(tokenValue).user);
+    }
+  }, []);
+  console.log(userName, "name");
   function goToRegister() {
     navigation.navigate("Register");
   }
   function goToLogin() {
     navigation.navigate("Login");
   }
-  console.log(userName);
-  console.log(userName, "userName");
   return (
     <View style={style.container}>
-      {<Text>{userName}</Text>}
+      <Text>{userName}</Text>
       <TouchableOpacity onPress={goToRegister} style={style.button}>
         <Text>Go to Register</Text>
       </TouchableOpacity>

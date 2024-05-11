@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 import { AntDesign } from "@expo/vector-icons";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Storage from "react-native-storage";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 export default function Data({ data }) {
   const {
     setSendDataFunction,
@@ -20,12 +23,33 @@ export default function Data({ data }) {
     setTotalPrice,
     totalPrice,
   } = useContext(CustomContext);
+  const token = async () => {
+    return await AsyncStorage.getItem("userToken");
+  };
+  const [tokenValue, setTokenValue] = useState("");
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const tokenValue = await token();
+      console.log(tokenValue, "kurac");
+      setTokenValue(tokenValue);
+    };
+    fetchToken();
+  }, [token]);
 
   function handleBuy(item) {
     if (alreadyInCart(item)) {
       alert("vec dodat");
     } else {
       setSendDataFunction((datas) => [...datas, item]);
+      console.log(item, "items", item.fakeQuantity);
+      axios.post(
+        "http://192.168.0.103:4005/api/updateUser",
+        { item: item, id: jwtDecode(tokenValue).userID },
+        {
+          headers: { Authorization: `Bearer ${tokenValue}` },
+        }
+      );
       setTotalPrice((prev) => prev + item.price);
     }
   }
