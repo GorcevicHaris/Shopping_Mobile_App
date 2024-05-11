@@ -10,8 +10,9 @@ export default function Favorites() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={dataFavorite ? dataFavorite : ""}
+        data={dataFavorite}
         renderItem={({ item }) => <DataFavorites key={item.id} data={item} />}
+        ItemSeparatorComponent={() => <View style={{ height: 30 }}></View>}
       />
     </View>
   );

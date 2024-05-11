@@ -21,7 +21,7 @@ export default function BasketData({ data, setFakeQuantity, removeProduct }) {
       setQuantity(quantity - 1);
       setFakeQuantity(quantity - 1);
       setTotalPrice(totalPrice - data.price);
-      console.log(totalPrice - data.price, "totalna cena + cena");
+      console.log(totalPrice - data.price, "totalna cena - cena");
     }
   };
 

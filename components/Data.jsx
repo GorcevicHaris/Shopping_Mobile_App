@@ -18,6 +18,7 @@ export default function Data({ data }) {
     dataFavorite,
     setDataFavorite,
     setTotalPrice,
+    totalPrice,
   } = useContext(CustomContext);
 
   function handleBuy(item) {

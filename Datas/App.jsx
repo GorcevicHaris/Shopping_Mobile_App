@@ -1,21 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  FontAwesome,
-  AntDesign,
-  FontAwesome5,
-  MaterialIcons,
-  Zocial,
-} from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import HomePage from "./HomePage";
-import Layout from "../Layout/Layout";
 import Favorites from "./Favorites/FavoritesPage";
 import Basket from "./Basket/Basket";
 import Profile from "./Profile/Profile";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import ContextProvider from "../Context/ContextProvider";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -33,6 +25,8 @@ export default function TabNavigator() {
               backgroundColor: siva,
               justifyContent: "center",
               alignItems: "center",
+              borderTopWidth: "0",
+              borderTopColor: "blue",
             },
             tabBarLabelStyle: { fontSize: 12 },
             tabBarActiveTintColor: "#E94B3CFF",
@@ -112,7 +106,13 @@ export default function TabNavigator() {
 
 function BasketStack() {
   return (
-    <Stack.Navigator initialRouteName="Basket">
+    <Stack.Navigator
+      screenOptions={() => ({
+        headerStyle: { backgroundColor: siva },
+        headerTintColor: orange,
+      })}
+      initialRouteName="Basket"
+    >
       <Stack.Screen name="Basket" component={Basket} />
     </Stack.Navigator>
   );
@@ -120,7 +120,13 @@ function BasketStack() {
 
 function FavoriteStack() {
   return (
-    <Stack.Navigator initialRouteName="Favorites">
+    <Stack.Navigator
+      screenOptions={() => ({
+        headerStyle: { backgroundColor: siva },
+        headerTintColor: orange,
+      })}
+      initialRouteName="Favorites"
+    >
       <Stack.Screen name="Favorites" component={Favorites} />
     </Stack.Navigator>
   );
@@ -128,7 +134,13 @@ function FavoriteStack() {
 
 function ProfileStack() {
   return (
-    <Stack.Navigator initialRouteName="Register">
+    <Stack.Navigator
+      screenOptions={() => ({
+        headerStyle: { backgroundColor: siva },
+        headerTintColor: orange,
+      })}
+      initialRouteName="Register"
+    >
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Login" component={Login} />
@@ -139,11 +151,11 @@ function ProfileStack() {
 function HomeStack() {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerTintColor: orange,
+      initialRouteName="Home"
+      screenOptions={() => ({
         headerStyle: { backgroundColor: siva },
-        headerTitleStyle: { fontSize: 25 },
-      }}
+        headerTintColor: orange,
+      })}
     >
       <Stack.Screen
         options={{ title: "H A R I N G A N" }}
@@ -153,17 +165,6 @@ function HomeStack() {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  tabBar: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "red",
-  },
-  tabLabel: {
-    fontSize: 12,
-  },
-});
 
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";

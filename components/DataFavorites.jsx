@@ -14,6 +14,12 @@ const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    borderRadius: 15,
+    gap: 10,
   },
   image: {
     objectFit: "contain",
@@ -22,8 +28,6 @@ const styles = StyleSheet.create({
     width: windowWidth > 400 ? 350 : 300,
     objectFit: "cover",
     alignSelf: "center",
-    borderWidth: 7,
-    borderColor: "lightgreen",
   },
 });
 export default DataFavorites;

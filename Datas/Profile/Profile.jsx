@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Button } from "react-native-elements/dist/buttons/Button";
 
 function Profile({ route, navigation }) {
   const [auth, setAuth] = useState(false);
@@ -22,6 +23,9 @@ function Profile({ route, navigation }) {
       <TouchableOpacity onPress={goToLogin} style={style.button}>
         <Text>Go to Login</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={style.logout}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -32,6 +36,14 @@ const style = StyleSheet.create({
   },
   button: {
     backgroundColor: "orange",
+    height: 50,
+    width: 120,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "flex-end",
+  },
+  logout: {
+    backgroundColor: "red",
     height: 50,
     width: 120,
     alignItems: "center",
