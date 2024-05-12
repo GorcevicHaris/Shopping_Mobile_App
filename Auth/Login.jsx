@@ -15,7 +15,6 @@ function Login({ navigation }) {
         if (res.data.Status === "Success") {
           navigation.navigate("Profile");
           AsyncStorage.setItem("userToken", res.data.token);
-          console.log(res.data.token, "token");
         } else {
           console.log(res.data.Message);
         }

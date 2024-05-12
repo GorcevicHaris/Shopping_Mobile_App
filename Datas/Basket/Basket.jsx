@@ -10,34 +10,33 @@ import {
 import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Basket() {
   const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
     useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [tokenValues, setTokenValue] = useState("");
 
-  const token = async () => {
-    return await AsyncStorage.getItem("userToken");
-  };
   useEffect(() => {
-    const fetchToken = async () => {
-      const token = await token();
-      setTokenValue(token);
-      console.log(tokenValues, "cokse");
+    const fetchData = async () => {
+      const token = await AsyncStorage.getItem("userToken");
+      if (token) {
+        axios
+          .get("http://localhost:4005/api/fetchOrders", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setOrders(res.data);
+          })
+          .catch((err) => console.log(err));
+      }
     };
-    fetchToken();
-  }, [token]);
-  console.log(tokenValues, "valuetoken");
-  useEffect(() => {
-    axios
-      .get("http://192.168.0.103:4005/api/fetchOrders", {
-        headers: { Authorization: `Bearer ${tokenValues}` },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }, [tokenValues]);
+    setInterval(() => {
+      fetchData();
+    }, 2000);
+  }, [sendDataFunction]);
+
   // useEffect(() => {
   //   setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
   // }, [totalPrice, sendDataFunction]);
@@ -73,7 +72,7 @@ export default function Basket() {
       )}
       <FlatList
         numColumns={windowWidth > 700 ? 2 : 1}
-        data={orders.length > 0 && orders}
+        data={orders}
         renderItem={({ item }) => (
           <BasketData
             removeProduct={(dataItem) =>
@@ -94,7 +93,7 @@ export default function Basket() {
             data={item}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListFooterComponent={renderFooter(orders, totalPrice)}
       />

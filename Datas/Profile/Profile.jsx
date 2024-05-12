@@ -20,6 +20,11 @@ function Profile({ route, navigation }) {
     fetchToken();
   }, [token]);
 
+  const logout = async () => {
+    await AsyncStorage.removeItem("userToken");
+    navigation.navigate("Login");
+  };
+
   useEffect(() => {
     if (tokenValue) {
       setUserName(jwtDecode(tokenValue).user);
@@ -41,7 +46,7 @@ function Profile({ route, navigation }) {
       <TouchableOpacity onPress={goToLogin} style={style.button}>
         <Text>Go to Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={style.logout}>
+      <TouchableOpacity onPress={logout} style={style.logout}>
         <Text>Logout</Text>
       </TouchableOpacity>
     </View>

@@ -31,7 +31,6 @@ export default function Data({ data }) {
   useEffect(() => {
     const fetchToken = async () => {
       const tokenValue = await token();
-      console.log(tokenValue, "kurac");
       setTokenValue(tokenValue);
     };
     fetchToken();
@@ -45,7 +44,11 @@ export default function Data({ data }) {
       console.log(item, "items", item.fakeQuantity);
       axios.post(
         "http://192.168.0.103:4005/api/updateUser",
-        { item: item, id: jwtDecode(tokenValue).userID },
+        {
+          quantity: data.fakeQuantity || 1,
+          item: item.id,
+          id: jwtDecode(tokenValue).userID,
+        },
         {
           headers: { Authorization: `Bearer ${tokenValue}` },
         }
