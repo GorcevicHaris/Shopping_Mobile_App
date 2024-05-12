@@ -17,13 +17,13 @@ export default function Basket() {
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [orders, setOrders] = useState([]);
-
+  const [done, setDone] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const token = await AsyncStorage.getItem("userToken");
       if (token) {
         axios
-          .get("http://localhost:4005/api/fetchOrders", {
+          .get("http://192.168.0.103:4005/api/fetchOrders", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {
@@ -35,11 +35,7 @@ export default function Basket() {
     setInterval(() => {
       fetchData();
     }, 2000);
-  }, [sendDataFunction]);
-
-  // useEffect(() => {
-  //   setTotalPrice(sendDataFunction.reduce((acc, curr) => acc + curr.price, 0));
-  // }, [totalPrice, sendDataFunction]);
+  }, []);
 
   const renderFooter = () => (
     <View>
@@ -76,18 +72,9 @@ export default function Basket() {
         renderItem={({ item }) => (
           <BasketData
             removeProduct={(dataItem) =>
-              setSendDataFunction((prev) => {
+              setOrders((prev) => {
                 return prev.filter((item) => item.id !== dataItem);
               })
-            }
-            setFakeQuantity={(quantity) =>
-              setSendDataFunction(
-                orders.map((data) =>
-                  data.id === item.id
-                    ? { ...data, fakeQuantity: quantity }
-                    : data
-                )
-              )
             }
             key={item.id}
             data={item}
@@ -99,23 +86,25 @@ export default function Basket() {
       />
       {showBill && (
         <View style={styles.totalContainer}>
-          {orders?.map((el) => {
-            return (
-              <View key={el.id}>
-                <Text style={{ color: "white" }}>
-                  {el.fakeQuantity === undefined ? 1 : el.fakeQuantity} x&nbsp;
-                  {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  {isNaN(el.price * el.fakeQuantity)
-                    ? el.price
-                    : el.price * el.fakeQuantity}
-                  $
-                </Text>
-              </View>
-            );
-          })}
+          {orders &&
+            orders?.map((el) => {
+              return (
+                <View key={el.id}>
+                  <Text style={{ color: "white" }}>
+                    {el.fakeQuantity === undefined ? 1 : el.fakeQuantity}
+                    x&nbsp;
+                    {el.price}$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {isNaN(el.price * el.fakeQuantity)
+                      ? el.price
+                      : el.price * el.fakeQuantity}
+                    $
+                  </Text>
+                </View>
+              );
+            })}
           <Text style={{ color: "white" }}>
             Total Price: {totalPrice.toFixed(2)}$
           </Text>

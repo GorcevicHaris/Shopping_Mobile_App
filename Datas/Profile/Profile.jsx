@@ -4,10 +4,13 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { jwtDecode } from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useContext } from "react";
+import { CustomContext } from "../../Context/ContextProvider";
 function Profile({ route, navigation }) {
   const [auth, setAuth] = useState(false);
   const [userName, setUserName] = useState("");
   const [tokenValue, setTokenValue] = useState("");
+  const { setTotalPrice } = useContext(CustomContext);
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
   };
@@ -23,6 +26,7 @@ function Profile({ route, navigation }) {
   const logout = async () => {
     await AsyncStorage.removeItem("userToken");
     navigation.navigate("Login");
+    setTotalPrice(0);
   };
 
   useEffect(() => {
@@ -30,7 +34,6 @@ function Profile({ route, navigation }) {
       setUserName(jwtDecode(tokenValue).user);
     }
   }, []);
-  console.log(userName, "name");
   function goToRegister() {
     navigation.navigate("Register");
   }
