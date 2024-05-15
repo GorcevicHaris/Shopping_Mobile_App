@@ -75,9 +75,9 @@ export default function BasketData({ data, removeProduct }) {
       <View style={styles.buyinfo}>
         <TouchableOpacity
           onPress={() => {
-            removeProduct(data.id);
-            onRemove(data.id);
-            setTotalPrice(totalPrice - data.price * quantity);
+            removeProduct(data.id); // Pretpostavljam da se već brine o uklanjanju sa UI
+            onRemove(data.id); // Poziv funkcije onRemove sa productID
+            setTotalPrice(totalPrice - data.price * quantity); // Ažuriranje ukupne cene
           }}
           style={styles.button3}
         >

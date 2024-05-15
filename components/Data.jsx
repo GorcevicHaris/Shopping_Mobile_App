@@ -53,9 +53,9 @@ export default function Data({ data }) {
           headers: { Authorization: `Bearer ${tokenValue}` },
         }
       );
-      setTotalPrice((prev) => prev + item.price);
     }
   }
+
   function alreadyInCart(item) {
     return sendDataFunction.some((datas) => datas.id === item.id);
   }

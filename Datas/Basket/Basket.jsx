@@ -11,31 +11,44 @@ import { CustomContext } from "../../Context/ContextProvider";
 import BasketData from "../../components/BasketData";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 export default function Basket() {
-  const { sendDataFunction, setTotalPrice, totalPrice, setSendDataFunction } =
-    useContext(CustomContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const { sendDataFunction, setSendDataFunction } = useContext(CustomContext);
   const [showBill, setShowBill] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = await AsyncStorage.getItem("userToken");
-      if (token) {
-        axios
-          .get("http://192.168.0.103:4005/api/fetchOrders", {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((res) => {
-            setOrders(res.data);
-          })
-          .catch((err) => console.log(err));
-      }
-    };
-    setInterval(() => {
+
+  const fetchData = async () => {
+    const token = await AsyncStorage.getItem("userToken");
+    if (token) {
+      axios
+        .get("http://192.168.0.103:4005/api/fetchOrders", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setOrders(res.data);
+          console.log(res.data);
+
+          let sum = 0;
+          sum = res.data.reduce((acc, item) => {
+            const itemTotal =
+              item.price *
+              (item.fakeQuantity === undefined ? 1 : item.fakeQuantity);
+            return acc + itemTotal;
+          }, 0); // Postavljanje početne vrednosti na 0
+          setTotalPrice(sum);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+  useFocusEffect(
+    React.useCallback(() => {
       fetchData();
-    }, 2000);
-  }, []);
+      return () => {};
+    }, [showBill])
+  );
 
   const renderFooter = () => (
     <View>
@@ -52,6 +65,10 @@ export default function Basket() {
       setShowAlert(false);
     }, 2500);
   };
+  function showBills() {
+    setShowBill(true);
+    console.log("lol");
+  }
 
   return (
     <View style={styles.container}>
@@ -105,9 +122,7 @@ export default function Basket() {
                 </View>
               );
             })}
-          <Text style={{ color: "white" }}>
-            Total Price: {totalPrice.toFixed(2)}$
-          </Text>
+          <Text style={{ color: "white" }}>Total Price: {totalPrice}$</Text>
           <TouchableOpacity onPress={handlePay} style={styles.pay}>
             <Text
               style={{
@@ -118,9 +133,7 @@ export default function Basket() {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              setShowBill(false);
-            }}
+            onPress={() => setShowBill(false)}
             style={styles.exit}
           >
             <Text

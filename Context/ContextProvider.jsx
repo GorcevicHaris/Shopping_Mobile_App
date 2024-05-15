@@ -7,6 +7,8 @@ export function ContextProvider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [dataFavorite, setDataFavorite] = useState([]);
 
+  const [kolicina, setKolicina] = useState(0);
+
   return (
     <CustomContext.Provider
       value={{
@@ -18,6 +20,8 @@ export function ContextProvider({ children }) {
         setTotalPrice,
         dataFavorite,
         setDataFavorite,
+        kolicina,
+        setKolicina,
       }}
     >
       {children}
