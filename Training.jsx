@@ -197,3 +197,13 @@ export default function App() {
 //     color: "#E94B3CFF",
 //   },
 // });
+//=========================================================================
+// 1.Fokus: Kada se komponenta pojavi na ekranu, kod unutar useFocusEffect se pokreće odmah.
+// 2.Defokus: Kada se komponenta ukloni sa ekrana ili pređe u pozadinski režim, funkcija vraćanja
+//  (clean-up function), koja se definira unutar useFocusEffect, se pokreće. Ovo je korisno za prekidanje
+//  API zahteva, čišćenje tajmera ili ukidanje pretplate na događaje.
+// /////////////////////////////////
+// Na primer, ako se useFocusEffect koristi bez zavisnosti (dependency array ),
+//  izvršavaće se svaki put kada se komponenta fokusira ili defokusira. Ukoliko
+//   dodate niz zavisnosti, onda će se pratiti promene onih specifičnih propertija
+//    ili stanja i tom prilikom će se ponovno izvršavati logika unutar useFocusEffect.
