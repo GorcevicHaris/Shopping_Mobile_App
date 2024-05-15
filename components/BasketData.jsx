@@ -13,7 +13,6 @@ export default function BasketData({ data, removeProduct }) {
   const onIncrement = () => {
     if (quantity < 10) {
       setQuantity(quantity + 1);
-      setTotalPrice((prev) => prev + data.price);
       axios.put(
         "http://192.168.0.103:4005/api/updateQuantity",
         {
@@ -30,7 +29,6 @@ export default function BasketData({ data, removeProduct }) {
   const onDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      setTotalPrice((prev) => prev - data.price);
       axios.put(
         "http://192.168.0.103:4005/api/updateQuantity",
         {
@@ -77,7 +75,6 @@ export default function BasketData({ data, removeProduct }) {
           onPress={() => {
             removeProduct(data.id); // Pretpostavljam da se već brine o uklanjanju sa UI
             onRemove(data.id); // Poziv funkcije onRemove sa productID
-            setTotalPrice(totalPrice - data.price * quantity); // Ažuriranje ukupne cene
           }}
           style={styles.button3}
         >
