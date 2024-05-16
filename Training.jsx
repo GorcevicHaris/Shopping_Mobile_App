@@ -142,7 +142,6 @@ export default function App() {
 //       );
 //     }
 //   }
-
 //   return (
 //     <View style={styles.container1}>
 //       <StatusBar />
@@ -169,11 +168,9 @@ export default function App() {
 //     </View>
 //   );
 // }
-
 // const windowWidth = Dimensions.get("window").width;
 
 // export default HomePage;
-
 // const styles = StyleSheet.create({
 //   container1: {
 //     flex: 1,
