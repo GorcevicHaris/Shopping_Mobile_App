@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useContext } from "react";
+import { CustomContext } from "../Context/ContextProvider";
 function Login({ navigation }) {
+  const { setIsUserLogged } = useContext(CustomContext);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -13,10 +16,9 @@ function Login({ navigation }) {
       .post(`http://192.168.0.103:4005/Login`, values)
       .then((res) => {
         if (res.data.Status === "Success") {
+          setIsUserLogged(true);
           navigation.navigate("Profile");
           AsyncStorage.setItem("userToken", res.data.token);
-          // console.log(res.data.token);
-          console.log(res.data);
         } else {
           console.log(res.data.Message);
         }

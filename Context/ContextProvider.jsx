@@ -6,6 +6,7 @@ export function ContextProvider({ children }) {
   const [sendDataFunction, setSendDataFunction] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [dataFavorite, setDataFavorite] = useState([]);
+  const [isUserLogged, setIsUserLogged] = useState(false);
 
   const [kolicina, setKolicina] = useState(0);
 
@@ -22,6 +23,8 @@ export function ContextProvider({ children }) {
         setDataFavorite,
         kolicina,
         setKolicina,
+        isUserLogged,
+        setIsUserLogged,
       }}
     >
       {children}
