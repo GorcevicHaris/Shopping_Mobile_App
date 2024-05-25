@@ -22,7 +22,7 @@ export default function Basket() {
     const token = await AsyncStorage.getItem("userToken");
     if (token) {
       axios
-        .get("http://192.168.0.103:4005/api/fetchOrders", {
+        .get("http://192.168.0.107:4005/api/fetchOrders", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {

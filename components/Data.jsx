@@ -43,7 +43,7 @@ export default function Data({ data }) {
       setSendDataFunction((datas) => [...datas, item]);
       console.log(item, "items", item.fakeQuantity);
       axios.post(
-        "http://192.168.0.103:4005/api/updateUser",
+        "http://192.168.0.107:4005/api/updateUser",
         {
           quantity: data.fakeQuantity || 1,
           item: item.id,

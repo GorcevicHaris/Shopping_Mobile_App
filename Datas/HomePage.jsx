@@ -20,7 +20,7 @@ function HomePage() {
   useEffect(() => {
     function getData() {
       axios
-        .get("http://192.168.0.103:4005/product")
+        .get("http://192.168.0.107:4005/product")
         .then((res) => {
           setProducts(res.data);
           setFilteredProducts(res.data);

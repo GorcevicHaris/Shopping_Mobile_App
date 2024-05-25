@@ -11,12 +11,12 @@ function Register({ navigation }) {
   console.log(values);
   function handleSubmit() {
     axios
-      .post(`http://192.168.0.103:4005/Register`, values)
+      .post(`http://192.168.0.107:4005/Register`, values)
       .then((res) => {
         console.log(res, "Prošlo");
         navigation.navigate("Login");
       })
-      .catch((err) => console.log(err, "Greska"));
+      .catch((err) => console.log(err, "Greska register"));
   }
   function goLogin() {
     navigation.navigate("Login");

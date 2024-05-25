@@ -5,7 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext } from "react";
 import { CustomContext } from "../Context/ContextProvider";
 function Login({ navigation }) {
-  const { setIsUserLogged } = useContext(CustomContext);
+  const { isUserLogged, setIsUserLogged } = useContext(CustomContext);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -13,14 +14,13 @@ function Login({ navigation }) {
 
   function handleSubmit() {
     axios
-      .post(`http://192.168.0.103:4005/Login`, values)
+      .post(`http://192.168.0.107:4005/Login`, values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          setIsUserLogged(true);
           navigation.navigate("Profile");
           AsyncStorage.setItem("userToken", res.data.token);
         } else {
-          console.log(res.data.Message);
+          console.log(res.data.Message, "greska login");
         }
       })
       .catch((err) => console.log(err, "Greska"));

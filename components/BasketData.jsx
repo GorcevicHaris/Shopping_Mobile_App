@@ -14,7 +14,7 @@ export default function BasketData({ data, removeProduct }) {
     if (quantity < 10) {
       setQuantity(quantity + 1);
       axios.put(
-        "http://192.168.0.103:4005/api/updateQuantity",
+        "http://192.168.0.107:4005/api/updateQuantity",
         {
           quantity: quantity + 1,
           productID: data.id,
@@ -30,7 +30,7 @@ export default function BasketData({ data, removeProduct }) {
     if (quantity > 1) {
       setQuantity(quantity - 1);
       axios.put(
-        "http://192.168.0.103:4005/api/updateQuantity",
+        "http://192.168.0.107:4005/api/updateQuantity",
         {
           quantity: quantity - 1,
           productID: data.id,
@@ -52,7 +52,7 @@ export default function BasketData({ data, removeProduct }) {
 
   const onRemove = async (productID) => {
     axios
-      .delete("http://192.168.0.103:4005/api/removeProductFromBasket", {
+      .delete("http://192.168.0.107:4005/api/removeProductFromBasket", {
         headers: { Authorization: `Bearer ${tokenValue}` }, // Dodajte token u zaglavlje za autentifikaciju
         data: { productID: productID }, // Pošaljite userID i productID u telu zahteva
       })

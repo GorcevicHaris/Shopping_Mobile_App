@@ -7,7 +7,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
 function Profile({ route, navigation }) {
-  const [auth, setAuth] = useState(false);
   const [userName, setUserName] = useState("");
   const [tokenValue, setTokenValue] = useState("");
   const { setTotalPrice } = useContext(CustomContext);
@@ -17,7 +16,6 @@ function Profile({ route, navigation }) {
   useEffect(() => {
     const fetchToken = async () => {
       const tokenValue = await token();
-      console.log(tokenValue, "kurac");
       setTokenValue(tokenValue);
     };
     fetchToken();
