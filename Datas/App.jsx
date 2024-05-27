@@ -140,9 +140,9 @@ function ProfileStack() {
       }}
       initialRouteName="Profile"
     >
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 }

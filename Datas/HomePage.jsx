@@ -17,10 +17,11 @@ function HomePage() {
   const [tokenValue, setTokenValue] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     function getData() {
       axios
-        .get("http://192.168.0.107:4005/product")
+        .get("http://localhost:4005/product")
         .then((res) => {
           setProducts(res.data);
           setFilteredProducts(res.data);

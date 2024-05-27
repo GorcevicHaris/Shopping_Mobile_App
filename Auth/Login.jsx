@@ -14,17 +14,20 @@ function Login({ navigation }) {
 
   function handleSubmit() {
     axios
-      .post(`http://192.168.0.107:4005/Login`, values)
+      .post(`http://localhost:4005/Login`, values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigation.navigate("Profile");
           AsyncStorage.setItem("userToken", res.data.token);
+          console.log(res.data.token, "cokse");
+          navigation.navigate("Profile");
+          setIsUserLogged(true);
         } else {
           console.log(res.data.Message, "greska login");
         }
       })
       .catch((err) => console.log(err, "Greska"));
   }
+
   return (
     <View style={styles.container}>
       <TextInput

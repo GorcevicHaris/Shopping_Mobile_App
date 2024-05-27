@@ -22,12 +22,12 @@ export default function Basket() {
     const token = await AsyncStorage.getItem("userToken");
     if (token) {
       axios
-        .get("http://192.168.0.107:4005/api/fetchOrders", {
+        .get("http://localhost:4005/api/fetchOrders", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
           setOrders(res.data);
-
+          console.log(res.data, "majmun");
           let sum = 0;
           sum = res.data.reduce((acc, item) => {
             const itemTotal =

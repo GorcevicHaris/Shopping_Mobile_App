@@ -1,11 +1,22 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { View, Image, StyleSheet, Text, Dimensions } from "react-native";
 
 function DataFavorites({ data }) {
+  const [tokenValue, setTokenValue] = useState("");
+  useEffect(() => {
+    const fetchToken = async () => {
+      const tokenValue = await AsyncStorage.getItem("userToken");
+      setTokenValue(tokenValue);
+      console.log(tokenValue, "datafarvorites");
+    };
+    fetchToken();
+  }, []);
   console.log(data, "data");
   return (
     <View style={styles.container}>
-      {/* <Text>{data.title}</Text> */}
       <Image style={styles.image} source={{ uri: data.imageURL }} />
     </View>
   );
