@@ -18,11 +18,11 @@ function Login({ navigation }) {
       .then((res) => {
         if (res.data.Status === "Success") {
           AsyncStorage.setItem("userToken", res.data.token);
-          console.log(res.data.token, "cokse");
+          // console.log(res.data.token, "cokse");
           navigation.navigate("Profile");
           setIsUserLogged(true);
         } else {
-          console.log(res.data.Message, "greska login");
+          // console.log(res.data.Message, "greska login");
         }
       })
       .catch((err) => console.log(err, "Greska"));

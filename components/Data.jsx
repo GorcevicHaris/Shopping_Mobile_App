@@ -20,8 +20,6 @@ export default function Data({ data }) {
     sendDataFunction,
     dataFavorite,
     setDataFavorite,
-    setTotalPrice,
-    totalPrice,
   } = useContext(CustomContext);
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
