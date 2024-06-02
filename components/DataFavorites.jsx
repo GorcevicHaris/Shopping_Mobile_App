@@ -10,11 +10,11 @@ function DataFavorites({ data }) {
     const fetchToken = async () => {
       const tokenValue = await AsyncStorage.getItem("userToken");
       setTokenValue(tokenValue);
-      console.log(tokenValue, "datafarvorites");
+      // console.log(tokenValue, "datafarvorites");
     };
     fetchToken();
   }, []);
-  console.log(data, "data");
+  // console.log(data, "data");
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: data.imageURL }} />

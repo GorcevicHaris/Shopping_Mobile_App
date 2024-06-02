@@ -27,7 +27,7 @@ export default function Basket() {
         })
         .then((res) => {
           setOrders(res.data);
-          console.log(res.data, "majmun");
+          console.log(res.data, "basketData");
           let sum = 0;
           sum = res.data.reduce((acc, item) => {
             const itemTotal =

@@ -11,34 +11,31 @@ export default function Favorites() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("userToken");
-        if (token) {
-          const response = await axios.get(
-            "http://localhost:4005/api/fetchFavorites",
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          setOrders(response.data);
-          console.log(response.data);
-        }
-      } catch (error) {
-        console.log(error);
+      const token = await AsyncStorage.getItem("userToken");
+      if (token) {
+        axios
+          .get("http://localhost:4005/api/fetchFavorites", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setOrders(res.data);
+            console.log(res.data, "favoritesData");
+          })
+          .catch((err) => console.log(err));
       }
     };
-
     setTimeout(() => {
       fetchData();
-    }, 5000);
+    }, 2000);
   }, []);
+  console.log("muderi", orders, "orderi");
 
-  const { dataFavorite, setDataFavorite } = useContext(CustomContext);
-  console.log(dataFavorite, "datafavorites");
+  // const { dataFavorite, setDataFavorite } = useContext(CustomContext);
+  // console.log(dataFavorite, "datafavorites");
   return (
     <View style={styles.container}>
       <FlatList
-        data={dataFavorite}
+        data={orders}
         renderItem={({ item }) => <DataFavorites key={item.id} data={item} />}
         ItemSeparatorComponent={() => <View style={{ height: 30 }}></View>}
       />

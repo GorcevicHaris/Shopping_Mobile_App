@@ -65,6 +65,12 @@ export default function Data({ data }) {
       alert("Already Added");
     } else {
       setDataFavorite((datas) => [...datas, item]);
+      axios.post(
+        "http://localhost:4005/api/updateFavoriteUser",
+        { item: item.id, id: jwtDecode(tokenValue).userID },
+        { headers: { Authorization: `Bearer ${tokenValue}` } }
+      );
+      console.log(item.id, jwtDecode(tokenValue).userID, "bljue");
     }
   }
   function inCart(item) {
