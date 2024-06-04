@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
+import { useFocusEffect } from "@react-navigation/native";
 function Profile({ route, navigation }) {
   const [userName, setUserName] = useState("");
   const [tokenValue, setTokenValue] = useState("");
@@ -13,13 +14,6 @@ function Profile({ route, navigation }) {
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
   };
-  useEffect(() => {
-    const fetchToken = async () => {
-      const tokenValue = await token();
-      setTokenValue(tokenValue);
-    };
-    fetchToken();
-  }, [token]);
 
   const logout = async () => {
     await AsyncStorage.removeItem("userToken");
@@ -27,11 +21,20 @@ function Profile({ route, navigation }) {
     setTotalPrice(0);
   };
 
-  useEffect(() => {
-    if (tokenValue) {
-      setUserName(jwtDecode(tokenValue).user);
-    }
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      async function fetchData() {
+        const tokenValues = await token();
+        setTokenValue(tokenValues);
+        if (tokenValues) {
+          setUserName(jwtDecode(tokenValues).user);
+        } else {
+          console.log("first");
+        }
+      }
+      fetchData();
+    }, [])
+  );
   function goToRegister() {
     navigation.navigate("Register");
   }
