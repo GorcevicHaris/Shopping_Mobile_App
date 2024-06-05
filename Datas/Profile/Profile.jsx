@@ -35,12 +35,15 @@ function Profile({ route, navigation }) {
       fetchData();
     }, [])
   );
+
   function goToRegister() {
     navigation.navigate("Register");
   }
+
   function goToLogin() {
     navigation.navigate("Login");
   }
+
   return (
     <View style={style.container}>
       <Text>{userName}</Text>

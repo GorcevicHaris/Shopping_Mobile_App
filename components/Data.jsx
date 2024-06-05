@@ -25,52 +25,66 @@ export default function Data({ data }) {
     return await AsyncStorage.getItem("userToken");
   };
   const [tokenValue, setTokenValue] = useState("");
+  const [userID, setUserID] = useState(null);
 
   useEffect(() => {
     const fetchToken = async () => {
       const tokenValue = await token();
       setTokenValue(tokenValue);
+      setUserID(jwtDecode(tokenValue).userID);
     };
     fetchToken();
   }, [token]);
 
-  function handleBuy(item) {
+  async function handleBuy(item) {
     if (alreadyInCart(item)) {
-      alert("vec dodat");
+      alert("Već dodato");
     } else {
-      setSendDataFunction((datas) => [...datas, item]);
-      console.log(item, "items", item.fakeQuantity);
-      axios.post(
-        "http://localhost:4005/api/updateUser",
-        {
-          quantity: data.fakeQuantity || 1,
-          item: item.id,
-          id: jwtDecode(tokenValue).userID,
-        },
-        {
-          headers: { Authorization: `Bearer ${tokenValue}` },
-        }
-      );
+      const newItem = { ...item, userID };
+      setSendDataFunction((datas) => [...datas, newItem]);
+      try {
+        await axios.post(
+          "http://localhost:4005/api/updateUser",
+          {
+            quantity: data.fakeQuantity || 1,
+            item: item.id,
+            id: userID,
+          },
+          {
+            headers: { Authorization: `Bearer ${tokenValue}` },
+          }
+        );
+      } catch (error) {
+        console.error("Greška", error);
+      }
     }
   }
 
+  console.log(userID, "typical userID");
   function alreadyInCart(item) {
-    return sendDataFunction.some((datas) => datas.id === item.id);
+    return sendDataFunction.some((datas) => {
+      console.log(datas.userID, "userID from sendDataFunction");
+      return datas.id === item.id && datas.userID == userID;
+    });
   }
 
-  function handleFavorite(item) {
+  async function handleFavorite(item) {
     if (inCart(item)) {
-      alert("Already Added");
+      alert("Već dodato u favorite");
     } else {
-      setDataFavorite((datas) => [...datas, item]);
-      axios.post(
-        "http://localhost:4005/api/updateFavoriteUser",
-        { item: item.id, id: jwtDecode(tokenValue).userID },
-        { headers: { Authorization: `Bearer ${tokenValue}` } }
-      );
-      console.log(item.id, jwtDecode(tokenValue).userID, "bljue");
+      try {
+        await axios.post(
+          "http://localhost:4005/api/updateFavoriteUser",
+          { item: item.id, id: userID },
+          { headers: { Authorization: `Bearer ${tokenValue}` } }
+        );
+        setDataFavorite((datas) => [...datas, { ...item, userID }]); // Dodajemo userID u novi objekat
+      } catch (error) {
+        console.error("Greška pri ažuriranju favorita korisnika:", error);
+      }
     }
   }
+
   function inCart(item) {
     return dataFavorite.some((datas) => datas.id === item.id);
   }
