@@ -5,15 +5,14 @@ import {
   Dimensions,
   StyleSheet,
   Image,
-  ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import { CustomContext } from "../Context/ContextProvider";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Storage from "react-native-storage";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
+
 export default function Data({ data }) {
   const {
     setSendDataFunction,
@@ -21,23 +20,31 @@ export default function Data({ data }) {
     dataFavorite,
     setDataFavorite,
   } = useContext(CustomContext);
-  const token = async () => {
-    return await AsyncStorage.getItem("userToken");
-  };
+
   const [tokenValue, setTokenValue] = useState("");
   const [userID, setUserID] = useState(null);
 
   useEffect(() => {
     const fetchToken = async () => {
-      const tokenValue = await token();
-      setTokenValue(tokenValue);
-      setUserID(jwtDecode(tokenValue).userID);
+      const tokenValue = await AsyncStorage.getItem("userToken");
+      if (tokenValue) {
+        setTokenValue(tokenValue);
+        setUserID(jwtDecode(tokenValue).userID);
+      }
     };
     fetchToken();
-  }, [token]);
+  }, []);
+
+  useEffect(() => {
+    // Ensure userID is set before any interaction
+    if (userID) {
+      console.log("UserID is set:", userID);
+    }
+  }, [userID]);
 
   async function handleBuy(item) {
-    if (alreadyInCart(item)) {
+    console.log("Checking if item is already in cart:", item.id);
+    if (await alreadyInCart(item)) {
       alert("Već dodato");
     } else {
       const newItem = { ...item, userID };
@@ -60,16 +67,16 @@ export default function Data({ data }) {
     }
   }
 
-  console.log(userID, "typical userID");
-  function alreadyInCart(item) {
+  async function alreadyInCart(item) {
+    console.log("sendDataFunction state:", sendDataFunction);
     return sendDataFunction.some((datas) => {
       console.log(datas.userID, "userID from sendDataFunction");
-      return datas.id === item.id && datas.userID == userID;
+      return datas.id === item.id && datas.userID === userID;
     });
   }
 
   async function handleFavorite(item) {
-    if (inCart(item)) {
+    if (await inCart(item)) {
       alert("Već dodato u favorite");
     } else {
       try {
@@ -78,16 +85,20 @@ export default function Data({ data }) {
           { item: item.id, id: userID },
           { headers: { Authorization: `Bearer ${tokenValue}` } }
         );
-        setDataFavorite((datas) => [...datas, { ...item, userID }]); // Dodajemo userID u novi objekat
+        setDataFavorite((datas) => [...datas, { ...item, userID }]);
       } catch (error) {
         console.error("Greška pri ažuriranju favorita korisnika:", error);
       }
     }
   }
 
-  function inCart(item) {
-    return dataFavorite.some((datas) => datas.id === item.id);
+  async function inCart(item) {
+    console.log("dataFavorite state:", dataFavorite);
+    return dataFavorite.some(
+      (datas) => datas.id === item.id && datas.userID === userID
+    );
   }
+
   return (
     <View style={styles.container}>
       <AntDesign
@@ -107,6 +118,7 @@ export default function Data({ data }) {
     </View>
   );
 }
+
 const orange = "#E94B3CFF";
 const siva = "#2D2926FF";
 const windowWidth = Dimensions.get("window").width;
