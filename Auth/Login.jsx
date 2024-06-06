@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { CustomContext } from "../Context/ContextProvider";
 function Login({ navigation }) {
   const { isUserLogged, setIsUserLogged } = useContext(CustomContext);
-
+  const { setSendDataFunction } = useContext(CustomContext);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -18,6 +18,7 @@ function Login({ navigation }) {
       .then((res) => {
         if (res.data.Status === "Success") {
           AsyncStorage.setItem("userToken", res.data.token);
+          setSendDataFunction([]);
           // console.log(res.data.token, "cokse");
           navigation.navigate("Profile");
           setIsUserLogged(true);
