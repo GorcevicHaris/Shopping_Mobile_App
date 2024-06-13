@@ -8,6 +8,7 @@ import {
   Modal,
   Button,
 } from "react-native";
+//cd server npm init -y npm i cors express nodemon - backend part
 // npm install @react-navigation/native @react-navigation/native-stack
 // npx expo install react-native-screens react-native-safe-area-context
 // import { NavigationContainer } from "@react-navigation/native";

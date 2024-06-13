@@ -25,7 +25,6 @@ export default function Data({ data }) {
     return await AsyncStorage.getItem("userToken");
   };
   const [tokenValue, setTokenValue] = useState("");
-  const [userID, setUserID] = useState(null);
 
   useEffect(() => {
     const fetchToken = async () => {

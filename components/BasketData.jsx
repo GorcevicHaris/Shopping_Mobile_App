@@ -7,8 +7,7 @@ import { jwtDecode } from "jwt-decode";
 
 export default function BasketData({ data, removeProduct }) {
   const [quantity, setQuantity] = useState(1);
-  const { totalPrice, setTotalPrice, setSendDataFunction, sendDataFunction } =
-    useContext(CustomContext);
+  const { setSendDataFunction, sendDataFunction } = useContext(CustomContext);
   const [tokenValue, setTokenValue] = useState("");
   const onIncrement = () => {
     if (quantity < 10) {
