@@ -46,6 +46,18 @@ function Profile({ route, navigation }) {
 
   return (
     <View style={style.container}>
+      <View
+        style={{
+          borderRadius: "50%",
+          width: 100,
+          height: 100,
+          backgroundColor: "red",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>Photo</Text>
+      </View>
       <Text>{userName}</Text>
       <TouchableOpacity onPress={goToRegister} style={style.button}>
         <Text>Go to Register</Text>
