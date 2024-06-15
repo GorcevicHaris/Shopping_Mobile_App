@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
 import { useFocusEffect } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 function Profile({ route, navigation }) {
   const [userName, setUserName] = useState("");
   const [tokenValue, setTokenValue] = useState("");
