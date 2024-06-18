@@ -45,9 +45,14 @@ function Profile({ route, navigation }) {
     navigation.navigate("Login");
   }
 
+  function handleEdit() {
+    navigation.navigate("profileEdit");
+  }
+
   return (
     <View style={style.container}>
-      <View
+      <TouchableOpacity
+        onPress={handleEdit}
         style={{
           borderRadius: "50%",
           width: 100,
@@ -57,8 +62,8 @@ function Profile({ route, navigation }) {
           alignItems: "center",
         }}
       >
-        <Text>Photo</Text>
-      </View>
+        <Text>Edit </Text>
+      </TouchableOpacity>
       <Text>{userName}</Text>
       <TouchableOpacity onPress={goToRegister} style={style.button}>
         <Text>Go to Register</Text>

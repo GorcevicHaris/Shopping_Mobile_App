@@ -10,6 +10,7 @@ import Profile from "./Profile/Profile";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import { NavigationContainer } from "@react-navigation/native";
+import EditProfile from "./Profile/EditProfile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -143,6 +144,7 @@ function ProfileStack() {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="profileEdit" component={EditProfile} />
     </Stack.Navigator>
   );
 }
