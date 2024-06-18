@@ -4,6 +4,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useContext } from "react";
 import { CustomContext } from "../Context/ContextProvider";
+import { jwtDecode } from "jwt-decode";
 function Login({ navigation }) {
   const { isUserLogged, setIsUserLogged } = useContext(CustomContext);
   const { setSendDataFunction } = useContext(CustomContext);
@@ -11,6 +12,7 @@ function Login({ navigation }) {
     email: "",
     password: "",
   });
+  const { userName, setUserName } = useContext(CustomContext);
 
   function handleSubmit() {
     axios
@@ -19,6 +21,7 @@ function Login({ navigation }) {
         if (res.data.Status === "Success") {
           AsyncStorage.setItem("userToken", res.data.token);
           setSendDataFunction([]);
+          setUserName(jwtDecode(res.data.token).user);
           // console.log(res.data.token, "cokse");
           navigation.navigate("Profile");
           setIsUserLogged(true);

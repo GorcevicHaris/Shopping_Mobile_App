@@ -9,8 +9,8 @@ import { CustomContext } from "../../Context/ContextProvider";
 import { useFocusEffect } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 function Profile({ route, navigation }) {
-  const [userName, setUserName] = useState("");
   const [tokenValue, setTokenValue] = useState("");
+  const { userName, setUserName } = useContext(CustomContext);
   const { setTotalPrice } = useContext(CustomContext);
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
@@ -27,15 +27,11 @@ function Profile({ route, navigation }) {
       async function fetchData() {
         const tokenValues = await token();
         setTokenValue(tokenValues);
-        if (tokenValues) {
-          setUserName(jwtDecode(tokenValues).user);
-        } else {
-          console.log("first");
-        }
       }
       fetchData();
     }, [])
   );
+  console.log(userName);
 
   function goToRegister() {
     navigation.navigate("Register");

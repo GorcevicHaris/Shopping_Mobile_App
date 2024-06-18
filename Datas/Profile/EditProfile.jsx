@@ -7,10 +7,12 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-native-elements";
+import { useContext } from "react";
+import { CustomContext } from "../../Context/ContextProvider";
 
-export default function EditProfile() {
+export default function EditProfile({ navigation }) {
   const [tokenValues, setTokenValues] = useState();
-  const [name, setName] = useState();
+  const { userName, setUserName } = useContext(CustomContext);
 
   async function token() {
     return await AsyncStorage.getItem("userToken");
@@ -18,28 +20,25 @@ export default function EditProfile() {
 
   async function updateUserName() {
     await axios.put("http://localhost:4005/api/updatUserName", {
-      name: name,
+      name: userName,
       id: jwtDecode(tokenValues).userID,
     });
+    navigation.navigate("Profile");
   }
-  console.log(name);
+  console.log(userName, "ime");
   useEffect(() => {
     async function fetchData() {
       const tokenValue = await token();
       setTokenValues(tokenValue);
-      if (tokenValue) {
-        setName(jwtDecode(tokenValue).user);
-      } else {
-        console.log("ne postoji");
-      }
     }
     fetchData();
   }, []);
+
   return (
     <View style={styles.container}>
       <TextInput
-        onChangeText={(e) => setName(e)}
-        value={name}
+        onChangeText={(e) => setUserName(e)}
+        value={userName}
         style={styles.input}
       />
       <Button title={"update"} onPress={updateUserName} />

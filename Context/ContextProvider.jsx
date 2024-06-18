@@ -8,6 +8,7 @@ export function ContextProvider({ children }) {
   const [dataFavorite, setDataFavorite] = useState([]);
   const [kolicina, setKolicina] = useState(0);
   const [isUserLogged, setIsUserLogged] = useState(false);
+  const [userName, setUserName] = useState("");
 
   return (
     <CustomContext.Provider
@@ -24,6 +25,8 @@ export function ContextProvider({ children }) {
         setKolicina,
         isUserLogged,
         setIsUserLogged,
+        userName,
+        setUserName,
       }}
     >
       {children}
