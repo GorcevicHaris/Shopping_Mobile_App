@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext } from "react";
 import { CustomContext } from "../Context/ContextProvider";
 import { jwtDecode } from "jwt-decode";
-function Login({ navigation }) {
-  const { isUserLogged, setIsUserLogged } = useContext(CustomContext);
+
+function Login({ navigation, setIsUserLogged }) {
   const { setSendDataFunction } = useContext(CustomContext);
   const [values, setValues] = useState({
     email: "",
@@ -22,11 +21,9 @@ function Login({ navigation }) {
           AsyncStorage.setItem("userToken", res.data.token);
           setSendDataFunction([]);
           setUserName(jwtDecode(res.data.token).user);
-          // console.log(res.data.token, "cokse");
-          navigation.navigate("Profile");
           setIsUserLogged(true);
         } else {
-          // console.log(res.data.Message, "greska login");
+          console.log(res.data.Message, "greska login");
         }
       })
       .catch((err) => console.log(err, "Greska"));

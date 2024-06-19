@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
 import { useFocusEffect } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
-function Profile({ route, navigation }) {
+function Profile({ navigation }) {
   const [tokenValue, setTokenValue] = useState("");
   const { userName, setUserName } = useContext(CustomContext);
   const { setTotalPrice } = useContext(CustomContext);
@@ -21,7 +21,6 @@ function Profile({ route, navigation }) {
     navigation.navigate("Login");
     setTotalPrice(0);
   };
-
   useFocusEffect(
     React.useCallback(() => {
       async function fetchData() {
