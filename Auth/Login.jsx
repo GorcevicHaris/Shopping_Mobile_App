@@ -6,12 +6,12 @@ import { CustomContext } from "../Context/ContextProvider";
 import { jwtDecode } from "jwt-decode";
 
 function Login({ navigation, setIsUserLogged }) {
+  const { userName, setUserName } = useContext(CustomContext);
   const { setSendDataFunction } = useContext(CustomContext);
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  const { userName, setUserName } = useContext(CustomContext);
 
   function handleSubmit() {
     axios

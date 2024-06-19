@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
 import { useFocusEffect } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { CommonActions } from "@react-navigation/native";
+
 function Profile({ navigation }) {
   const [tokenValue, setTokenValue] = useState("");
   const { userName, setUserName } = useContext(CustomContext);
@@ -37,9 +39,13 @@ function Profile({ navigation }) {
   }
 
   function goToLogin() {
-    navigation.navigate("Login");
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      })
+    );
   }
-
   function handleEdit() {
     navigation.navigate("profileEdit");
   }
