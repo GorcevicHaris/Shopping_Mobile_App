@@ -34,7 +34,7 @@ export default function MainNavigator() {
     <ContextProvider>
       <NavigationContainer>
         {isUserLogged ? (
-          <TabNavigator />
+          <TabNavigator setIsUserLogged={setIsUserLogged} />
         ) : (
           <AuthStack setIsUserLogged={setIsUserLogged} />
         )}
@@ -53,14 +53,14 @@ function AuthStack({ setIsUserLogged }) {
       initialRouteName="Login"
     >
       <Stack.Screen name="Login">
-        {(props) => <Login {...props} setIsUserLogged={setIsUserLogged} />}
+        {() => <Login setIsUserLogged={setIsUserLogged} />}
       </Stack.Screen>
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 }
 
-function TabNavigator() {
+function TabNavigator({ setIsUserLogged }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -127,7 +127,7 @@ function TabNavigator() {
       />
       <Tab.Screen
         name="ProfileStack"
-        component={ProfileStack}
+        children={() => <ProfileStack setIsUserLogged={setIsUserLogged} />}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons
@@ -173,7 +173,7 @@ function FavoriteStack() {
   );
 }
 
-function ProfileStack() {
+function ProfileStack({ setIsUserLogged }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -182,7 +182,9 @@ function ProfileStack() {
       }}
       initialRouteName="Profile"
     >
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Profile">
+        {(props) => <Profile setIsUserLogged={setIsUserLogged} />}
+      </Stack.Screen>
       <Stack.Screen name="profileEdit" component={EditProfile} />
     </Stack.Navigator>
   );

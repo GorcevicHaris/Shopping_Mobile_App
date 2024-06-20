@@ -1,28 +1,24 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Button } from "react-native-elements/dist/buttons/Button";
-import { jwtDecode } from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext } from "react";
-import { CustomContext } from "../../Context/ContextProvider";
 import { useFocusEffect } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker";
-import { CommonActions } from "@react-navigation/native";
+import { CustomContext } from "../../Context/ContextProvider";
 
-function Profile({ navigation }) {
+function Profile({ navigation, setIsUserLogged }) {
   const [tokenValue, setTokenValue] = useState("");
   const { userName, setUserName } = useContext(CustomContext);
   const { setTotalPrice } = useContext(CustomContext);
+
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
   };
 
   const logout = async () => {
     await AsyncStorage.removeItem("userToken");
-    navigation.navigate("Login");
+    setIsUserLogged(false);
     setTotalPrice(0);
   };
+
   useFocusEffect(
     React.useCallback(() => {
       async function fetchData() {
@@ -32,6 +28,7 @@ function Profile({ navigation }) {
       fetchData();
     }, [])
   );
+
   console.log(userName);
 
   function goToRegister() {
@@ -39,31 +36,17 @@ function Profile({ navigation }) {
   }
 
   function goToLogin() {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "Login" }],
-      })
-    );
+    navigation.navigate("Login");
   }
+
   function handleEdit() {
     navigation.navigate("profileEdit");
   }
 
   return (
     <View style={style.container}>
-      <TouchableOpacity
-        onPress={handleEdit}
-        style={{
-          borderRadius: "50%",
-          width: 100,
-          height: 100,
-          backgroundColor: "red",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text>Edit </Text>
+      <TouchableOpacity onPress={handleEdit} style={style.editButton}>
+        <Text>Edit</Text>
       </TouchableOpacity>
       <Text>{userName}</Text>
       <TouchableOpacity onPress={goToRegister} style={style.button}>
@@ -83,6 +66,14 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
   },
+  editButton: {
+    borderRadius: 50,
+    width: 100,
+    height: 100,
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   button: {
     backgroundColor: "orange",
     height: 50,
@@ -100,4 +91,5 @@ const style = StyleSheet.create({
     alignSelf: "flex-end",
   },
 });
+
 export default Profile;
