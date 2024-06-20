@@ -183,7 +183,7 @@ function ProfileStack({ setIsUserLogged }) {
       initialRouteName="Profile"
     >
       <Stack.Screen name="Profile">
-        {(props) => <Profile setIsUserLogged={setIsUserLogged} />}
+        {() => <Profile setIsUserLogged={setIsUserLogged} />}
       </Stack.Screen>
       <Stack.Screen name="profileEdit" component={EditProfile} />
     </Stack.Navigator>

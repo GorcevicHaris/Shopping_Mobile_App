@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { CustomContext } from "../../Context/ContextProvider";
 
-function Profile({ navigation, setIsUserLogged }) {
+function Profile({ setIsUserLogged }) {
   const [tokenValue, setTokenValue] = useState("");
   const { userName, setUserName } = useContext(CustomContext);
   const { setTotalPrice } = useContext(CustomContext);
-
+  const navigation = useNavigation();
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
   };
@@ -31,14 +31,6 @@ function Profile({ navigation, setIsUserLogged }) {
 
   console.log(userName);
 
-  function goToRegister() {
-    navigation.navigate("Register");
-  }
-
-  function goToLogin() {
-    navigation.navigate("Login");
-  }
-
   function handleEdit() {
     navigation.navigate("profileEdit");
   }
@@ -49,12 +41,6 @@ function Profile({ navigation, setIsUserLogged }) {
         <Text>Edit</Text>
       </TouchableOpacity>
       <Text>{userName}</Text>
-      <TouchableOpacity onPress={goToRegister} style={style.button}>
-        <Text>Go to Register</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={goToLogin} style={style.button}>
-        <Text>Go to Login</Text>
-      </TouchableOpacity>
       <TouchableOpacity onPress={logout} style={style.logout}>
         <Text>Logout</Text>
       </TouchableOpacity>

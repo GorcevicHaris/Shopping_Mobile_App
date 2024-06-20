@@ -9,7 +9,7 @@ export function ContextProvider({ children }) {
   const [kolicina, setKolicina] = useState(0);
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [userName, setUserName] = useState("");
-
+  const [bio, setBio] = useState("");
   return (
     <CustomContext.Provider
       value={{
@@ -27,6 +27,8 @@ export function ContextProvider({ children }) {
         setIsUserLogged,
         userName,
         setUserName,
+        bio,
+        setBio,
       }}
     >
       {children}

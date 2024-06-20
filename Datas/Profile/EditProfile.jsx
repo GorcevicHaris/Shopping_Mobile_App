@@ -12,7 +12,7 @@ import { CustomContext } from "../../Context/ContextProvider";
 
 export default function EditProfile({ navigation }) {
   const [tokenValues, setTokenValues] = useState();
-  const { userName, setUserName } = useContext(CustomContext);
+  const { userName, setUserName, bio, setBio } = useContext(CustomContext);
 
   async function token() {
     return await AsyncStorage.getItem("userToken");
@@ -25,7 +25,14 @@ export default function EditProfile({ navigation }) {
     });
     navigation.navigate("Profile");
   }
-  console.log(userName, "ime");
+
+  async function updateBio() {
+    axios.put("http://localhost:4005/api/updateBio", {
+      bio: bio,
+      id: jwtDecode(tokenValues).userID,
+    });
+  }
+
   useEffect(() => {
     async function fetchData() {
       const tokenValue = await token();
@@ -36,12 +43,24 @@ export default function EditProfile({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        onChangeText={(e) => setUserName(e)}
-        value={userName}
-        style={styles.input}
-      />
-      <Button title={"update"} onPress={updateUserName} />
+      <Text>Name</Text>
+      <View style={styles.inContainer}>
+        <TextInput
+          onChangeText={(e) => setUserName(e)}
+          value={userName}
+          style={styles.input}
+        />
+        <Button title={"Done"} onPress={updateUserName} />
+      </View>
+      <Text>Bio</Text>
+      <View style={styles.inContainer}>
+        <TextInput
+          onChangeText={(e) => setBio(e)}
+          value={bio}
+          style={styles.input}
+        />
+        <Button onPress={updateBio} title={"Done"} />
+      </View>
     </View>
   );
 }
@@ -50,12 +69,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "red",
-    alignItems: "center",
     justifyContent: "center",
+    paddingLeft: 35,
   },
   input: {
     width: 300,
     height: 40,
     backgroundColor: "white",
+  },
+  inContainer: {
+    flexDirection: "row",
   },
 });
