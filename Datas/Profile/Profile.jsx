@@ -6,8 +6,7 @@ import { CustomContext } from "../../Context/ContextProvider";
 
 function Profile({ setIsUserLogged }) {
   const [tokenValue, setTokenValue] = useState("");
-  const { userName, setUserName } = useContext(CustomContext);
-  const { setTotalPrice } = useContext(CustomContext);
+  const { userName, setTotalPrice, bio } = useContext(CustomContext);
   const navigation = useNavigation();
   const token = async () => {
     return await AsyncStorage.getItem("userToken");
@@ -41,6 +40,7 @@ function Profile({ setIsUserLogged }) {
         <Text>Edit</Text>
       </TouchableOpacity>
       <Text>{userName}</Text>
+      <Text>{bio}</Text>
       <TouchableOpacity onPress={logout} style={style.logout}>
         <Text>Logout</Text>
       </TouchableOpacity>

@@ -18,19 +18,17 @@ export default function EditProfile({ navigation }) {
     return await AsyncStorage.getItem("userToken");
   }
 
-  async function updateUserName() {
+  async function updateInfo() {
     await axios.put("http://localhost:4005/api/updatUserName", {
       name: userName,
       id: jwtDecode(tokenValues).userID,
     });
-    navigation.navigate("Profile");
-  }
 
-  async function updateBio() {
-    axios.put("http://localhost:4005/api/updateBio", {
+    await axios.put("http://localhost:4005/api/updateBio", {
       bio: bio,
       id: jwtDecode(tokenValues).userID,
     });
+    navigation.navigate("Profile");
   }
 
   useEffect(() => {
@@ -50,7 +48,6 @@ export default function EditProfile({ navigation }) {
           value={userName}
           style={styles.input}
         />
-        <Button title={"Done"} onPress={updateUserName} />
       </View>
       <Text>Bio</Text>
       <View style={styles.inContainer}>
@@ -59,7 +56,7 @@ export default function EditProfile({ navigation }) {
           value={bio}
           style={styles.input}
         />
-        <Button onPress={updateBio} title={"Done"} />
+        <Button onPress={updateInfo} title={"Done"} />
       </View>
     </View>
   );
