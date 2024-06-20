@@ -54,7 +54,7 @@ function Login({ navigation, setIsUserLogged }) {
     </View>
   );
 }
-
+//
 const styles = StyleSheet.create({
   container: {
     flex: 1,
