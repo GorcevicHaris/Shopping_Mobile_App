@@ -9,10 +9,16 @@ import axios from "axios";
 import { Button } from "react-native-elements";
 import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
+import SelectDropdown from "react-native-select-dropdown";
+import { Dropdown } from "react-native-element-dropdown";
 
 export default function EditProfile({ navigation }) {
   const [tokenValues, setTokenValues] = useState();
   const { userName, setUserName, bio, setBio } = useContext(CustomContext);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+
+  const data = [{ label: "male" }, { label: "famale" }];
 
   async function token() {
     return await AsyncStorage.getItem("userToken");
@@ -58,6 +64,28 @@ export default function EditProfile({ navigation }) {
         />
         <Button onPress={updateInfo} title={"Done"} />
       </View>
+      <Text>Gender</Text>
+      <Dropdown
+        style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={data}
+        search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder={!isFocus ? "Select item" : "..."}
+        searchPlaceholder="Search..."
+        value={value}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
+        onChange={(item) => {
+          setValue(item.value);
+          setIsFocus(false);
+        }}
+      />
     </View>
   );
 }
@@ -76,5 +104,33 @@ const styles = StyleSheet.create({
   },
   inContainer: {
     flexDirection: "row",
+  },
+  dropdown: {
+    height: 40,
+    width: 300,
+    backgroundColor: "white",
+  },
+  label: {
+    position: "absolute",
+    backgroundColor: "white",
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
   },
 });

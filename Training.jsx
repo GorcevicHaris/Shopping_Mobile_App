@@ -205,3 +205,4 @@ export default function App() {
 //  izvršavaće se svaki put kada se komponenta fokusira ili defokusira. Ukoliko
 //   dodate niz zavisnosti, onda će se pratiti promene onih specifičnih propertija
 //    ili stanja i tom prilikom će se ponovno izvršavati logika unutar useFocusEffect.
+// npm install react-native-select-dropdown za select i options
