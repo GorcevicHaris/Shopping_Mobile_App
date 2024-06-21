@@ -14,18 +14,21 @@ import { Dropdown } from "react-native-element-dropdown";
 
 export default function EditProfile({ navigation }) {
   const [tokenValues, setTokenValues] = useState();
-  const { userName, setUserName, bio, setBio } = useContext(CustomContext);
-  const [value, setValue] = useState(null);
+  const { userName, setUserName, bio, setBio, gender, setGender } =
+    useContext(CustomContext);
   const [isFocus, setIsFocus] = useState(false);
 
-  const data = [{ label: "male" }, { label: "famale" }];
-
+  const data = [
+    { label: "Male", value: "male" },
+    { label: "Famale", value: "famale" },
+  ];
+  console.log(gender);
   async function token() {
     return await AsyncStorage.getItem("userToken");
   }
-
+  console.log(data);
   async function updateInfo() {
-    await axios.put("http://localhost:4005/api/updatUserName", {
+    await axios.put("http://localhost:4005/api/updateUserName", {
       name: userName,
       id: jwtDecode(tokenValues).userID,
     });
@@ -35,6 +38,11 @@ export default function EditProfile({ navigation }) {
       id: jwtDecode(tokenValues).userID,
     });
     navigation.navigate("Profile");
+
+    await axios.put("http://localhost:4005/api/updateGender", {
+      gender: gender,
+      id: jwtDecode(tokenValues).userID,
+    });
   }
 
   useEffect(() => {
@@ -72,17 +80,16 @@ export default function EditProfile({ navigation }) {
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
-        search
         maxHeight={300}
         labelField="label"
         valueField="value"
         placeholder={!isFocus ? "Select item" : "..."}
         searchPlaceholder="Search..."
-        value={value}
+        value={gender}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
-          setValue(item.value);
+          setGender(item.value);
           setIsFocus(false);
         }}
       />

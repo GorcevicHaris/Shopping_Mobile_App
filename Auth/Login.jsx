@@ -6,7 +6,8 @@ import { CustomContext } from "../Context/ContextProvider";
 import { jwtDecode } from "jwt-decode";
 
 function Login({ navigation, setIsUserLogged }) {
-  const { userName, setUserName, setBio } = useContext(CustomContext);
+  const { userName, setUserName, setBio, setGender } =
+    useContext(CustomContext);
   const { setSendDataFunction } = useContext(CustomContext);
   const [values, setValues] = useState({
     email: "",
@@ -21,8 +22,10 @@ function Login({ navigation, setIsUserLogged }) {
           AsyncStorage.setItem("userToken", res.data.token);
           setSendDataFunction([]);
           setUserName(jwtDecode(res.data.token).user);
-          setIsUserLogged(true);
           setBio(jwtDecode(res.data.token).Bio);
+          setGender(res.data.gender);
+          setIsUserLogged(true);
+          console.log(res.data);
         } else {
           console.log(res.data.Message, "greska login");
         }
