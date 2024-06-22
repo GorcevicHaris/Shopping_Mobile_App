@@ -9,7 +9,6 @@ import axios from "axios";
 import { Button } from "react-native-elements";
 import { useContext } from "react";
 import { CustomContext } from "../../Context/ContextProvider";
-import SelectDropdown from "react-native-select-dropdown";
 import { Dropdown } from "react-native-element-dropdown";
 
 export default function EditProfile({ navigation }) {
