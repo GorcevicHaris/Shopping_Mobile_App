@@ -22,11 +22,10 @@ export default function EditProfile({ navigation }) {
     { label: "Male", value: "male" },
     { label: "Famale", value: "famale" },
   ];
-  console.log(gender);
+
   async function token() {
     return await AsyncStorage.getItem("userToken");
   }
-  console.log(data);
   async function updateInfo() {
     await axios.put("http://localhost:4005/api/updateUserName", {
       name: userName,
@@ -37,12 +36,13 @@ export default function EditProfile({ navigation }) {
       bio: bio,
       id: jwtDecode(tokenValues).userID,
     });
-    navigation.navigate("Profile");
 
     await axios.put("http://localhost:4005/api/updateGender", {
       gender: gender,
       id: jwtDecode(tokenValues).userID,
     });
+
+    navigation.navigate("Profile");
   }
 
   useEffect(() => {
