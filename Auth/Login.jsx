@@ -13,7 +13,6 @@ function Login({ navigation, setIsUserLogged }) {
     email: "",
     password: "",
   });
-
   function handleSubmit() {
     axios
       .post(`http://localhost:4005/Login`, values)
